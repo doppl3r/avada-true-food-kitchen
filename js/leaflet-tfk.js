@@ -13,7 +13,7 @@
         // Loop through each locations and create a pin and popup
         var group = new L.featureGroup([]);
         locations.forEach(function(value){
-            var name = value['display_name'];
+            var name = value['title'];
             var address = value['address'];
             var phone = value['phone'];
             var link = value['link'];

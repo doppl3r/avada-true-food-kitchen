@@ -8,7 +8,6 @@
 	// Initialize shortcode object
 	require_once 'php/class-shortcodes.php';
 	$tfk_shortcodes = new TFK_Shortcodes();
-	$tfk_shortcodes -> run();
 
 	// Initialize resources object
 	require_once 'php/class-resources.php';

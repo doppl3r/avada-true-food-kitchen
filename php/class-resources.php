@@ -6,7 +6,8 @@
                 wp_register_script('leaflet', get_stylesheet_directory_uri() . '/js/leaflet.js');
                 wp_register_script('leaflet-tfk', get_stylesheet_directory_uri() . '/js/leaflet-tfk.js');
                 wp_register_style('leaflet', get_stylesheet_directory_uri() . '/css/leaflet.css');
-		        wp_register_style('leaflet-doppler-locations', get_stylesheet_directory_uri() . '/css/leaflet-tfk.css');
+		        wp_register_style('leaflet-tfk', get_stylesheet_directory_uri() . '/css/leaflet-tfk.css');
             }
         }
     }
+?>
