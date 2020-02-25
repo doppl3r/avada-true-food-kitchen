@@ -35,7 +35,7 @@
                 wp_enqueue_style('leaflet-tfk');
 
                 // Front-end icon URL
-                $dir = get_stylesheet_directory_uri() . '/';
+                $dir = get_stylesheet_directory_uri();
 
                 // Get posts if ACF key exits
                 $locations_array = TFK_Shortcodes::get_locations();
