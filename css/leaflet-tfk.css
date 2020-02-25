@@ -1,0 +1,6 @@
+/* Leaflet - Doppler Locations Styling */
+.leaflet-container { min-height: 240px; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper { padding: 12px; border-radius: 0; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content { margin: 0; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul { margin: 0; list-style: none; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li { margin: 0; }
