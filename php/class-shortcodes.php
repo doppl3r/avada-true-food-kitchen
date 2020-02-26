@@ -38,22 +38,25 @@
                 $dir = get_stylesheet_directory_uri();
 
                 // Get posts if ACF key exits
-                $page_array = TFK_Shortcodes::get_pages($atts);
+                $meta_key = 'general';
+                $field_groups = TFK_Shortcodes::get_field_groups_from_posts($meta_key);
 
                 // Send array to the front end
-                wp_localize_script('leaflet-tfk', 'locations', $page_array);
+                wp_localize_script('leaflet-tfk', 'locations', $field_groups);
                 wp_localize_script('leaflet-tfk', 'path', $dir);
 
                 // Render leaflet map HTML
                 $output .= '<div id="leaflet-map" ' . $style . '></div>';
             }
             else if ($data == 'list') {
-                // Generate array using local function 'get_location'
-                $page_array = TFK_Shortcodes::get_pages($atts);
+                // Generate array
+                $meta_key = 'general';
+                if ($type == 'event') $meta_key = 'event';
+                $field_groups = TFK_Shortcodes::get_field_groups_from_posts($meta_key);
 
                 // Populate group_array by list value
                 $group_array = [];
-                foreach($page_array as $group_key => $element) {
+                foreach($field_groups as $group_key => $element) {
                     if (empty($group)) $group_id = $group_key;
                     else $group_id = $group;
                     $group_name = !empty($element[$group_id]) ? $element[$group_id] : "Other";
@@ -124,72 +127,80 @@
                 $output = '<div class="tfk-list">' .  $output . '</div>';
             }
             else if ($data == 'slides') {
-                // Generate array using local function 'get_location'
-                $page_array = TFK_Shortcodes::get_pages($atts);
+                // Generate array
+                $meta_key = 'slide';
+                $field_groups = TFK_Shortcodes::get_field_groups_from_posts($meta_key);
+
+                wp_enqueue_style('slick');
+                wp_enqueue_script('slick');
+
+                // TODO: Populate slides list with global slides page
+
+                // Loop through each slide
+                foreach($field_groups as $field_group_key => $field_group) {
+                    $slides = $field_groups[$field_group_key]['slides'];
+                    foreach($slides as $slide) {
+                        $content = $slide['content'];
+                        $button = $slide['button'];
+                        $dates = $slide['dates'];
+                        echo '<pre>';
+                        var_dump($content);
+                    }
+                }
             }
 
             // Return output value (default empty)
             return $output;
         }
 
-        public function get_pages($atts) {
-            // Query a single location result if the 'general' group field is present
-            if (!empty(get_field('general'))) $post__in = array(get_the_ID());
-            $page_query = get_posts(array(
+        public function get_field_groups_from_posts($meta_key) {
+            // Limit query to a single post if current page has a $meta_key
+            if (!empty(get_field($meta_key))) $post__in = array(get_the_ID());
+
+            // Query posts if $meta_key (ACF) exists
+            $posts = get_posts(array(
                 'numberposts'	=> -1,
                 'post_type'		=> 'page',
-                'meta_key'		=> 'general',
+                'meta_key'		=> $meta_key,
                 'post__in'      => $post__in
             ));
 
             // Generate array for JS object
-            $page_array = array();
-            foreach($page_query as $index => $page) {
+            $field_groups = array();
+            foreach($posts as $index => $post) {
                 // Add general location info to array
-                $city = get_field('general', $page->ID)['city'];
-                $state = get_field('general', $page->ID)['state'];
-                $street = get_field('general', $page->ID)['street'];
-                $zip = get_field('general', $page->ID)['zip'];
-                $address = $street . ', ' . $city . ', ' . $state . ' ' . $zip;
-                $latitude = get_field('general', $page->ID)['latitude'];
-                $longitude = get_field('general', $page->ID)['longitude'];
-                $geo = array($latitude, $longitude);
-                $page_array[$index]['title'] = get_the_title($page->ID);
-                $page_array[$index]['link'] = get_permalink($page->ID);
-                $page_array[$index]['status'] = get_field('general', $page->ID)['status'];
-                $page_array[$index]['phone'] = get_field('general', $page->ID)['phone'];
-                $page_array[$index]['city'] = $city;
-                $page_array[$index]['state'] = $state;
-                $page_array[$index]['street'] = $street;
-                $page_array[$index]['zip'] = $zip;
-                $page_array[$index]['address'] = $address;
-                $page_array[$index]['geo'] = $geo;
+                if ($meta_key == 'general' || $meta_key == 'event') {
+                    $city = get_field('general', $post->ID)['city'];
+                    $state = get_field('general', $post->ID)['state'];
+                    $street = get_field('general', $post->ID)['street'];
+                    $zip = get_field('general', $post->ID)['zip'];
+                    $address = $street . ', ' . $city . ', ' . $state . ' ' . $zip;
+                    $latitude = get_field('general', $post->ID)['latitude'];
+                    $longitude = get_field('general', $post->ID)['longitude'];
+                    $geo = array($latitude, $longitude);
+                    $field_groups[$index]['title'] = get_the_title($post->ID);
+                    $field_groups[$index]['link'] = get_permalink($post->ID);
+                    $field_groups[$index]['status'] = get_field('general', $post->ID)['status'];
+                    $field_groups[$index]['phone'] = get_field('general', $post->ID)['phone'];
+                    $field_groups[$index]['city'] = $city;
+                    $field_groups[$index]['state'] = $state;
+                    $field_groups[$index]['street'] = $street;
+                    $field_groups[$index]['zip'] = $zip;
+                    $field_groups[$index]['address'] = $address;
+                    $field_groups[$index]['geo'] = $geo;
+                }
 
                 // Add events to location array if defined in shortcode
-                if ($atts['type'] == 'event' || $atts['type'] == 'events') {
-                    $page_array[$index]['events'] = get_field('event', $page->ID);
+                if ($meta_key == 'event') {
+                    $field_groups[$index]['events'] = get_field('event', $post->ID);
+                }
+
+                // Add events to location array if defined in shortcode
+                if ($meta_key == 'slide') {
+                    $field_groups[$index]['slides'] = get_field('slide', $post->ID);
                 }
             }
-            return $page_array;
-        }
-
-        public function get_slides($atts) {
-            // Query a single location result if the 'slides' group field is present
-            if (!empty(get_field('slides'))) $post__in = array(get_the_ID());
-            $page_query = get_posts(array(
-                'numberposts'	=> -1,
-                'post_type'		=> 'page',
-                'meta_key'		=> 'slides',
-                'post__in'      => $post__in
-            ));
-
-            // Generate array for JS object
-            $page_array = array();
-            foreach($page_query as $index => $page) {
-                // Add general location info to array
-                $page_array[$index]['slides'] = get_field('slide', $page->ID);
-            }
-            return $page_array;
+            return $field_groups;
         }
     }
 ?>
