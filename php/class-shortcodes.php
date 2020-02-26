@@ -15,6 +15,10 @@
             $height = $atts['height'];
             $group = $atts['group'];
 
+            // Enqueue child theme scripts
+            wp_enqueue_script('scripts-tfk');
+            wp_enqueue_style('styles-tfk');
+
             // Get post data
             if (isset($id)) $post_id = $id;
             else $post_id = get_the_ID();
@@ -131,22 +135,44 @@
                 $meta_key = 'slide';
                 $field_groups = TFK_Shortcodes::get_field_groups_from_posts($meta_key);
 
+                // Enqueue slider libraries
                 wp_enqueue_style('slick');
                 wp_enqueue_script('slick');
+
+                // Set up slider height with padding
+                if (empty($width)) $width = 1920;
+                if (empty($height)) $height = 1080;
+                $width = floatval(preg_replace("/[^0-9]/", "", $width));
+                $height = floatval(preg_replace("/[^0-9]/", "", $height));
+                $padding = (($height / $width) * 100) . "%";
 
                 // TODO: Populate slides list with global slides page
 
                 // Loop through each slide
+                $group_output = '';
                 foreach($field_groups as $field_group_key => $field_group) {
                     $slides = $field_groups[$field_group_key]['slides'];
                     foreach($slides as $slide) {
                         $content = $slide['content'];
                         $button = $slide['button'];
                         $dates = $slide['dates'];
-                        echo '<pre>';
-                        var_dump($content);
+
+                        $group_output .= '
+                            <div class="tfk-slide" style="background-image: url(' . $content['image']['url'] . ')">
+                                <div class="item">
+                                    <div class="content">
+                                        <h1>' . $content['title'] . '</h1>
+                                        <h2>' . $content['subtitle'] . '</h2>
+                                        <p>' . $content['text'] . '</p>
+                                        <a href="' . $button['link'] . '" target="' . $button['target'] . '">' . $button['text'] . '</a>
+                                    </div>
+                                </div>
+                            </div>
+                        ';
                     }
                 }
+
+                $output = '<div class="tfk-slider" style="padding-bottom: ' . $padding . ';">' .  $group_output . '</div>';
             }
 
             // Return output value (default empty)

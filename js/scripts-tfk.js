@@ -12,7 +12,7 @@
 	// Add slider functionality
 	$(document).ready(function(){
 		if ($('.tfk-slider').length) {
-			$('.tfk-slider').slick({ dots: true });
+			$('.tfk-slider').slick({ dots: true, speed: 1000, fade: true });
 		}
 	});
 	

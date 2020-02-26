@@ -582,7 +582,7 @@
                                     "id": ""
                                 },
                                 "return_format": "array",
-                                "preview_size": "medium",
+                                "preview_size": "recent-works-thumbnail",
                                 "library": "all",
                                 "min_width": "",
                                 "min_height": "",
@@ -615,6 +615,25 @@
                                 "key": "field_5e557c6dae4cd",
                                 "label": "Subtitle",
                                 "name": "subtitle",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_5e56a4614c185",
+                                "label": "Text",
+                                "name": "text",
                                 "type": "text",
                                 "instructions": "",
                                 "required": 0,

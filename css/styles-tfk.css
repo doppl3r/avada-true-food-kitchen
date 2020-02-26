@@ -1,13 +1,28 @@
+/* True Food Kitchen - list styling */
+.tfk-list { list-style: none; padding: 0; margin: 0; }
+.tfk-list li { margin: 0; padding: 0; }
+.tfk-list li ul { list-style: none; margin: 0; padding: 0; }
+.tfk-list li ul li { margin: 0; padding: 0; }
+.tfk-list li > [aria-selected="false"] + ul { display: none; }
+
 /* True Food Kitchen - Slick carousel styling */
-.slick-slider img { width: 100%; }
-.slick-slider .slick-arrow { opacity: 0; background-color: #fff; border-radius: 50%; position: absolute; top: calc(50% - 16px); z-index: 1; font-size: 0; width: 32px; height: 32px; text-decoration: none; }
-.slick-slider:hover .slick-arrow, .slick-slider .slick-arrow:focus { opacity: 1; }
-.slick-slider .slick-arrow.slick-prev { left: 12px; }
-.slick-slider .slick-arrow.slick-next { right: 12px; }
-.slick-slider .slick-arrow:before { font-size: 32px; line-height: 16px; color: #000; }
-.slick-slider .slick-arrow.slick-prev:before { content: '\2039'; }
-.slick-slider .slick-arrow.slick-next:before { content: '\203A'; }
-.slick-slider .slick-dots { height: 64px; display: flex; align-items: center; justify-content: center; margin: 0; list-style: none; position: absolute; bottom: 0; width: 100%; line-height: 0; }
-.slick-slider .slick-dots li { display: inline-block; margin: 0 4px; list-style: none; line-height: 0; }
-.slick-slider .slick-dots li button { font-size: 0; background-color: transparent; border: 2px solid #fff; color: transparent; width: 16px; height: 16px; padding: 0; border-radius: 50%; }
-.slick-slider .slick-dots li.slick-active button { background-color: #fff; }
+.tfk-slider { height: 0; /* padding (height) can be changed in PHP shortcode */ }
+.tfk-slider div { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+.tfk-slider .tfk-slide { background-size: cover; background-position: center; }
+.tfk-slider .tfk-slide .item { display: flex; justify-content: center; align-items: center; }
+.tfk-slider .tfk-slide .item .content { position: relative; }
+.tfk-slider .slick-arrow { cursor: pointer; opacity: 0; background-color: #fff; border-radius: 50%; border: none; position: absolute; top: calc(50% - 16px); z-index: 1; font-size: 0; width: 32px; height: 32px; text-decoration: none; }
+.tfk-slider:hover .slick-arrow, .slick-slider .slick-arrow:focus { opacity: 1; }
+.tfk-slider .slick-arrow.slick-prev { left: 12px; }
+.tfk-slider .slick-arrow.slick-next { right: 12px; }
+.tfk-slider .slick-arrow:before { font-size: 32px; line-height: 12px; color: #000; }
+.tfk-slider .slick-arrow.slick-prev:before { content: '\2039'; }
+.tfk-slider .slick-arrow.slick-next:before { content: '\203A'; }
+.tfk-slider .slick-dots { height: 64px; display: flex; align-items: center; justify-content: center; margin: 0; list-style: none; position: absolute; bottom: 0; width: 100%; line-height: 0; }
+.tfk-slider .slick-dots li { display: inline-block; margin: 0 4px; list-style: none; line-height: 0; }
+.tfk-slider .slick-dots li button { cursor: pointer; font-size: 0; background-color: transparent; border: 2px solid #fff; color: transparent; width: 16px; height: 16px; padding: 0; border-radius: 50%; }
+.tfk-slider .slick-dots li.slick-active button { background-color: #fff; }
+
+@media (max-width: 720px) {
+    .tfk-slider { height: 100vh; padding: 0; }
+}
