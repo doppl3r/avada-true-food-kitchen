@@ -8,7 +8,7 @@
         L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
 
         // Icon options
-        var icon = L.icon({ iconUrl: path + '/img/marker-icon.png', shadowUrl: path + 'img/marker-shadow.png', iconSize: [25, 41], shadowSize: [41, 41], iconAnchor: [13, 41], shadowAnchor: [13, 41], popupAnchor: [0, -41] });
+        var icon = L.icon({ iconUrl: path + '/img/marker-icon.png', shadowUrl: path + '/img/marker-shadow.png', iconSize: [25, 41], shadowSize: [41, 41], iconAnchor: [13, 41], shadowAnchor: [13, 41], popupAnchor: [0, -41] });
 
         // Loop through each locations and create a pin and popup
         var group = new L.featureGroup([]);

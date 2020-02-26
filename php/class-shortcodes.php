@@ -38,7 +38,7 @@
                 $dir = get_stylesheet_directory_uri();
 
                 // Get posts if ACF key exits
-                $locations_array = TFK_Shortcodes::get_locations();
+                $locations_array = TFK_Shortcodes::get_locations($type);
 
                 // Send array to the front end
                 wp_localize_script('leaflet-tfk', 'locations', $locations_array);
@@ -49,7 +49,7 @@
             }
             else if ($data == 'list') {
                 // Generate array using local function 'get_location'
-                $locations_array = TFK_Shortcodes::get_locations();
+                $locations_array = TFK_Shortcodes::get_locations($type);
 
                 // Populate group_array by list value
                 $group_array = [];
@@ -124,14 +124,14 @@
                     }
                     else $output .= '<p>No events available at this time.</p>';
                 }
-                $output = '<div class="doppler-list">' .  $output . '</div>';
+                $output = '<div class="tfk-list">' .  $output . '</div>';
             }
 
             // Return output value (default empty)
             return $output;
         }
 
-        public function get_locations() {
+        public function get_locations($type) {
             // Set $post__in array if current page is a child location
             if (!empty(get_field('general'))) $post__in = array(get_the_ID());
 
@@ -146,31 +146,30 @@
             // Generate array for JS object
             $locations_array = array();
             foreach($locations as $index => $location) {
-                $title = get_the_title($location->ID);
-                $link = get_permalink($location->ID);
-                $status = get_field('general', $location->ID)['status'];
-                $phone = get_field('general', $location->ID)['phone'];
+                // Add general location info to array
                 $city = get_field('general', $location->ID)['city'];
                 $state = get_field('general', $location->ID)['state'];
                 $street = get_field('general', $location->ID)['street'];
                 $zip = get_field('general', $location->ID)['zip'];
+                $address = $street . ', ' . $city . ', ' . $state . ' ' . $zip;
                 $latitude = get_field('general', $location->ID)['latitude'];
                 $longitude = get_field('general', $location->ID)['longitude'];
-                $address = $street . ', ' . $city . ', ' . $state . ' ' . $zip;
-                $events = get_field('event', $location->ID);
                 $geo = array($latitude, $longitude);
-
-                $locations_array[$index]['title'] = $title;
-                $locations_array[$index]['link'] = $link;
-                $locations_array[$index]['status'] = $status;
-                $locations_array[$index]['phone'] = $status;
+                $locations_array[$index]['title'] = get_the_title($location->ID);
+                $locations_array[$index]['link'] = get_permalink($location->ID);
+                $locations_array[$index]['status'] = get_field('general', $location->ID)['status'];
+                $locations_array[$index]['phone'] = get_field('general', $location->ID)['phone'];
                 $locations_array[$index]['city'] = $city;
                 $locations_array[$index]['state'] = $state;
                 $locations_array[$index]['street'] = $street;
                 $locations_array[$index]['zip'] = $zip;
                 $locations_array[$index]['address'] = $address;
-                $locations_array[$index]['events'] = $events;
                 $locations_array[$index]['geo'] = $geo;
+
+                // Add events to location array if defined in shortcode
+                if ($type == 'event') {
+                    $locations_array[$index]['events'] = get_field('event', $location->ID);
+                }
             }
 
             //echo '<pre>';
