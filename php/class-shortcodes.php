@@ -130,7 +130,7 @@
                     if ($group_has_data == true) {
                         $output .= $group_start . $group_output . $group_end;
                     }
-                    else $output .= '<p>No events available at this time.</p>';
+                    else $output .= '<p>No information available at this time.</p>';
                 }
                 $output = '<div class="tfk-list">' .  $output . '</div>';
             }

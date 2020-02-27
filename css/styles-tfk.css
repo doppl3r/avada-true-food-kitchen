@@ -27,11 +27,11 @@
 .tfk-slider div { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
 .tfk-slider .tfk-slide { background-size: cover; background-position: center; }
 .tfk-slider .tfk-slide .item { display: flex; justify-content: center; align-items: center; }
-.tfk-slider .tfk-slide .item .content { position: relative; }
-.tfk-slider .tfk-slide .item .content h1 { color: #fff; font-family: 'Bernadette Rough'; text-transform: none; margin: 0; text-shadow: 0 0 50px #000, 0 0 50px #000; }
-.tfk-slider .tfk-slide .item .content h2 { color: #fff; font-family: 'Brandon Grotesque Medium' !important; font-size: 96px !important; margin: 0; text-shadow: 0 0 50px #000, 0 0 50px #000; }
+.tfk-slider .tfk-slide .item .content { position: relative; padding: 12px 48px; text-shadow: 0 0 50px #000, 0 0 50px #000; }
+.tfk-slider .tfk-slide .item .content h1 { color: #fff; font-family: 'Bernadette Rough'; text-transform: none; margin: 0; }
+.tfk-slider .tfk-slide .item .content h2 { color: #fff; font-family: 'Brandon Grotesque Medium' !important; font-size: 96px !important; margin: 0; }
 .tfk-slider .tfk-slide .item .content p { color: #fff; font-size: 18px; margin-bottom: 24px; }
-.tfk-slider .tfk-slide .item .content a { background-color: rgba(0, 0, 0, 0.5); border: 1px solid #fff; border-radius: 5px; color: #fff !important; font-size: 16px; padding: 10px 32px; text-transform: uppercase; }
+.tfk-slider .tfk-slide .item .content a { background-color: rgba(0, 0, 0, 0.5); border: 1px solid #fff; border-radius: 5px; color: #fff !important; font-size: 16px; padding: 10px 32px; text-transform: uppercase; white-space: nowrap; }
 .tfk-slider .tfk-slide .item .content a:hover { background-color: #487426; border-color: transparent; }
 .tfk-slider .slick-arrow { cursor: pointer; opacity: 0; background-color: #fff; border-radius: 50%; border: none; position: absolute; top: calc(50% - 16px); z-index: 1; font-size: 0; width: 32px; height: 32px; text-decoration: none; }
 .tfk-slider:hover .slick-arrow, .slick-slider .slick-arrow:focus { opacity: 1; }
@@ -47,4 +47,6 @@
 
 @media (max-width: 800px) {
     .tfk-slider { height: 100vh; padding: 0; }
+    .tfk-slider .tfk-slide .item .content h1 { font-size: 24px !important; line-height: 48px !important; }
+    .tfk-slider .tfk-slide .item .content h2 { font-size: 56px !important; line-height: 48px !important; margin-bottom: 16px; }
 }
