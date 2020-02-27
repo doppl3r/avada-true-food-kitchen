@@ -14,6 +14,7 @@
             $width = $atts['width'];
             $height = $atts['height'];
             $group = $atts['group'];
+            $status = $atts['status'];
 
             // Enqueue child theme scripts
             wp_enqueue_script('scripts-tfk');
@@ -84,16 +85,18 @@
                     // Loop through each group item
                     foreach($group_item as $loc_key => $loc) {
                         if ($type == 'location' || empty($type)) {
-                            $coming_soon = ($loc['status'] == 'coming soon') ? '<li class="location-address">Coming soon</li>' : '';
-                            $group_has_data = true;
-                            $group_output .=
-                                '<li>' .
-                                    '<ul class="location">' .
-                                        '<li class="location-title"><a href="' . $loc['link'] . '">' . $loc['title'] . '</a></li>' . $coming_soon .
-                                        '<li class="location-phone"><a href="tel:' . $loc['phone'] . '">' . $loc['phone'] . '</a></li>' .
-                                        '<li class="location-address"><a href="https://www.google.com/maps/place/' . $loc['address'] . '" target="_blank">' . $loc['address'] . '</a></li>' .
-                                    '</ul>' .
-                                '</li>';
+                            if ($status == $loc['status'] || empty($status)) {
+                                $coming_soon = ($loc['status'] != 'open') ? '<li class="location-status">' . $loc['status'] . '</li>' : '';
+                                $group_has_data = true;
+                                $group_output .=
+                                    '<li>' .
+                                        '<ul class="location">' .
+                                            '<li class="location-title"><a href="' . $loc['link'] . '">' . $loc['title'] . '</a></li>' . $coming_soon .
+                                            '<li class="location-phone"><a href="tel:' . $loc['phone'] . '">' . $loc['phone'] . '</a></li>' .
+                                            '<li class="location-address"><a href="https://www.google.com/maps/place/' . $loc['address'] . '" target="_blank">' . $loc['address'] . '</a></li>' .
+                                        '</ul>' .
+                                    '</li>';
+                            }
                         }
                         else if ($type == 'event') {
                             $events = $loc['events'];

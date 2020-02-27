@@ -12,14 +12,15 @@
 .tfk-list .group-title[aria-selected="true"] .icon { background-color: #487426; }
 .tfk-list .group-title[aria-selected="true"] .icon:after { transform: rotate(135deg); border-color: #fff; margin: -8px 0 0 0; }
 .tfk-list .locations { padding: 12px 64px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.1); }
-.tfk-list .locations .location { border-bottom: 1px solid #487426; padding: 8px 0; }
-.tfk-list .locations .location li { color: #4B5862; }
-.tfk-list .locations .location li a { color: inherit !important; }
-.tfk-list .locations .location li a:hover { color: #487426 !important; }
-.tfk-list .locations .location:last-of-type { border: none; }
-.tfk-list .locations .location .location-title { font-size: 16px; }
-.tfk-list .locations .location .location-phone { font-size: 12px; }
-.tfk-list .locations .location .location-address { font-size: 12px; }
+.tfk-list .location { border-bottom: 1px solid #487426; padding: 8px 0; }
+.tfk-list .location li { color: #4B5862; }
+.tfk-list .location li a { color: inherit !important; }
+.tfk-list .location li a:hover { color: #487426 !important; }
+.tfk-list .location:last-of-type { border: none; }
+.tfk-list .location .location-title { font-size: 16px; }
+.tfk-list .location .location-status { font-size: 12px; }
+.tfk-list .location .location-phone { font-size: 12px; }
+.tfk-list .location .location-address { font-size: 12px; }
 
 /* True Food Kitchen - Slick carousel styling */
 .tfk-slider { height: 0; /* padding (height) can be changed in PHP shortcode */ }
