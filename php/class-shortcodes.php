@@ -77,25 +77,26 @@
                     $group_end = '';
 
                     if (!empty($group)) {
-                        $group_start = '<li><a class="title" aria-selected="false" href="#">' . $group_toggle . '</a><ul class="container">';
+                        $group_start = '<li class="group"><a class="group-title" aria-selected="false" href="#"><span class="icon"></span>' . $group_toggle . '</a><ul class="locations">';
                         $group_end = '</ul></li>';
                     }
 
                     // Loop through each group item
                     foreach($group_item as $loc_key => $loc) {
                         if ($type == 'location' || empty($type)) {
+                            $coming_soon = ($loc['status'] == 'coming soon') ? '<li class="location-address">Coming soon</li>' : '';
                             $group_has_data = true;
                             $group_output .=
                                 '<li>' .
                                     '<ul class="location">' .
-                                        '<li class="location-title"><a href="' . $group_item[$loc_key]['link'] . '">' . $group_item[$loc_key]['title'] . '</a></li>' .
-                                        '<li class="location-phone"><a href="tel:' . $group_item[$loc_key]['phone'] . '">' . $group_item[$loc_key]['phone'] . '</a></li>' .
-                                        '<li class="location-address"><a href="https://www.google.com/maps/place/' . $group_item[$loc_key]['address'] . '" target="_blank">' . $group_item[$loc_key]['address'] . '</a></li>' .
+                                        '<li class="location-title"><a href="' . $loc['link'] . '">' . $loc['title'] . '</a></li>' . $coming_soon .
+                                        '<li class="location-phone"><a href="tel:' . $loc['phone'] . '">' . $loc['phone'] . '</a></li>' .
+                                        '<li class="location-address"><a href="https://www.google.com/maps/place/' . $loc['address'] . '" target="_blank">' . $loc['address'] . '</a></li>' .
                                     '</ul>' .
                                 '</li>';
                         }
                         else if ($type == 'event') {
-                            $events = $group_item[$loc_key]['events'];
+                            $events = $loc['events'];
 
                             // Loop through each post
                             foreach($events as $event) {
@@ -156,15 +157,27 @@
                         $content = $slide['content'];
                         $button = $slide['button'];
                         $dates = $slide['dates'];
+                        
+                        // Conditionally add slide content
+                        $image_string = '';
+                        $title_string = '';
+                        $subtitle_string = '';
+                        $text_string = '';
+                        $button_string = '';
+                        if (!empty($content['image'])) $image_string = $content['image']['url'];
+                        if (!empty($content['title'])) $title_string = '<h1>' . $content['title'] . '</h1>';
+                        if (!empty($content['subtitle'])) $subtitle_string = '<h2>' . $content['subtitle'] . '</h2>';
+                        if (!empty($content['text'])) $text_string = '<p>' . $content['text'] . '</p>';
+                        if (!empty($button['link'])) $button_string = '<a href="' . $button['link'] . '" target="' . $button['target'] . '">' . $button['text'] . '</a>';
 
                         $group_output .= '
-                            <div class="tfk-slide" style="background-image: url(' . $content['image']['url'] . ')">
+                            <div class="tfk-slide" style="background-image: url(' . $image_string . ')">
                                 <div class="item">
                                     <div class="content">
-                                        <h1>' . $content['title'] . '</h1>
-                                        <h2>' . $content['subtitle'] . '</h2>
-                                        <p>' . $content['text'] . '</p>
-                                        <a href="' . $button['link'] . '" target="' . $button['target'] . '">' . $button['text'] . '</a>
+                                        ' . $title_string . '
+                                        ' . $subtitle_string . '
+                                        ' . $text_string . '
+                                        ' . $button_string . '
                                     </div>
                                 </div>
                             </div>

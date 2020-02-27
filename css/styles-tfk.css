@@ -4,6 +4,22 @@
 .tfk-list li ul { list-style: none; margin: 0; padding: 0; }
 .tfk-list li ul li { margin: 0; padding: 0; }
 .tfk-list li > [aria-selected="false"] + ul { display: none; }
+.tfk-list .group { margin-bottom: 4px; }
+.tfk-list .group-title { background-color: #fff; font-family: 'Brandon Grotesque Bold'; font-size: 18px; display: block; padding: 12px 16px; border-radius: 5px; align-items: center; position: relative; }
+.tfk-list .group-title .icon { width: 26px; height: 36px; background-color: #f3f3f3; border-radius: 5px; margin-right: 20px; display: inline-flex; align-items: center; justify-content: center; vertical-align: bottom;  }
+.tfk-list .group-title .icon:after { content: ''; width: 8px; height: 8px; border: 2px solid #252525; display: inline-block; border-left-color: transparent !important; border-bottom-color: transparent !important; transform: rotate(45deg); transition: all 0.25s ease-in-out; margin-left: -6px; }
+.tfk-list .group-title[aria-selected="true"] { background-color: #f3f3f3; }
+.tfk-list .group-title[aria-selected="true"] .icon { background-color: #487426; }
+.tfk-list .group-title[aria-selected="true"] .icon:after { transform: rotate(135deg); border-color: #fff; margin: -8px 0 0 0; }
+.tfk-list .locations { padding: 12px 64px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.1); }
+.tfk-list .locations .location { border-bottom: 1px solid #487426; padding: 8px 0; }
+.tfk-list .locations .location li { color: #4B5862; }
+.tfk-list .locations .location li a { color: inherit !important; }
+.tfk-list .locations .location li a:hover { color: #487426 !important; }
+.tfk-list .locations .location:last-of-type { border: none; }
+.tfk-list .locations .location .location-title { font-size: 16px; }
+.tfk-list .locations .location .location-phone { font-size: 12px; }
+.tfk-list .locations .location .location-address { font-size: 12px; }
 
 /* True Food Kitchen - Slick carousel styling */
 .tfk-slider { height: 0; /* padding (height) can be changed in PHP shortcode */ }
@@ -11,6 +27,11 @@
 .tfk-slider .tfk-slide { background-size: cover; background-position: center; }
 .tfk-slider .tfk-slide .item { display: flex; justify-content: center; align-items: center; }
 .tfk-slider .tfk-slide .item .content { position: relative; }
+.tfk-slider .tfk-slide .item .content h1 { color: #fff; font-family: 'Bernadette Rough'; text-transform: none; margin: 0; text-shadow: 0 0 50px #000, 0 0 50px #000; }
+.tfk-slider .tfk-slide .item .content h2 { color: #fff; font-family: 'Brandon Grotesque Medium' !important; font-size: 96px !important; margin: 0; text-shadow: 0 0 50px #000, 0 0 50px #000; }
+.tfk-slider .tfk-slide .item .content p { color: #fff; font-size: 18px; margin-bottom: 24px; }
+.tfk-slider .tfk-slide .item .content a { background-color: rgba(0, 0, 0, 0.5); border: 1px solid #fff; border-radius: 5px; color: #fff !important; font-size: 16px; padding: 10px 32px; text-transform: uppercase; }
+.tfk-slider .tfk-slide .item .content a:hover { background-color: #487426; border-color: transparent; }
 .tfk-slider .slick-arrow { cursor: pointer; opacity: 0; background-color: #fff; border-radius: 50%; border: none; position: absolute; top: calc(50% - 16px); z-index: 1; font-size: 0; width: 32px; height: 32px; text-decoration: none; }
 .tfk-slider:hover .slick-arrow, .slick-slider .slick-arrow:focus { opacity: 1; }
 .tfk-slider .slick-arrow.slick-prev { left: 12px; }
@@ -23,6 +44,6 @@
 .tfk-slider .slick-dots li button { cursor: pointer; font-size: 0; background-color: transparent; border: 2px solid #fff; color: transparent; width: 16px; height: 16px; padding: 0; border-radius: 50%; }
 .tfk-slider .slick-dots li.slick-active button { background-color: #fff; }
 
-@media (max-width: 720px) {
+@media (max-width: 800px) {
     .tfk-slider { height: 100vh; padding: 0; }
 }
