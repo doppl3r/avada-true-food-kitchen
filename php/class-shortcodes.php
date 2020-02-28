@@ -115,13 +115,17 @@
                                 // If type attribute is not set, or if type attribute matches custom post type
                                 $group_has_data = true;
                                 $group_output .= '
-                                    <ul>
-                                        <li class="image"><img src="' . $content_image_src . '" alt="' . $content_image_alt . '"></li>
-                                        <li class="title">' . $content_title . '</li>
-                                        <li class="date">' . $date_event . '</li>
-                                        <li class="content">' . $content_text . '</li>
-                                        <li class="link"><a href="' . $button_link . '" target="' . $button_target . '">' . $button_text . '</a></li>
-                                    </ul>
+                                    <div class="event">
+                                        <div class="left">
+                                            <div class="image"><img src="' . $content_image_src . '" alt="' . $content_image_alt . '"></div>
+                                        </div>
+                                        <div class="right">
+                                            <div class="title">' . $content_title . '</div>
+                                            <div class="date">' . $date_event . '</div>
+                                            <div class="content">' . $content_text . '</div>
+                                            <div class="link"><a href="' . $button_link . '" target="' . $button_target . '">' . $button_text . '</a></div>
+                                        </div>
+                                    </div>
                                 ';
                             }
                         }
@@ -130,7 +134,7 @@
                     if ($group_has_data == true) {
                         $output .= $group_start . $group_output . $group_end;
                     }
-                    else $output .= '<p>No information available at this time.</p>';
+                    else $output .= '<p><em>No information available at this time.</em></p>';
                 }
                 $output = '<div class="tfk-list">' .  $output . '</div>';
             }

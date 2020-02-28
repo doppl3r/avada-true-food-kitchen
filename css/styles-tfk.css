@@ -21,6 +21,15 @@
 .tfk-list .location .location-status { font-size: 12px; }
 .tfk-list .location .location-phone { font-size: 12px; }
 .tfk-list .location .location-address { font-size: 12px; }
+.tfk-list .event { background-color: rgba(255, 255, 255, 0.2); border: 1px solid #d4d4d4; display: flex; align-items: center; margin: 8px 0; }
+.tfk-list .event .left { padding: 24px 5% 24px 10%; }
+.tfk-list .event .left img { max-width: 200px; }
+.tfk-list .event .right { padding: 24px 10% 24px 5%; text-align: left; font-size: 16px;  }
+.tfk-list .event .right .title { color: #212121; font-family: 'Brandon Grotesque Medium'; font-size: 18px; text-transform: uppercase; }
+.tfk-list .event .right .date { line-height: 16px; padding-bottom: 24px; }
+.tfk-list .event .right .content { padding-bottom: 24px; }
+.tfk-list .event .right .link a { display: inline-block;background-color: #487426; padding: 10px 48px; border-radius: 5px; border: 1px solid transparent; color: #fff !important; font-family: 'Brandon Grotesque Medium'; font-size: 16px; text-transform: uppercase; }
+.tfk-list .event .right .link a:hover { background-color: #fff; border-color: #487426; color: #487426 !important; }
 
 /* True Food Kitchen - Slick carousel styling */
 .tfk-slider { background-color: #eee; height: 0; opacity: 0; transition: all 1s ease-in-out; /* padding (height) can be changed in PHP shortcode */ }
