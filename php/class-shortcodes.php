@@ -58,6 +58,7 @@
                 $meta_key = 'general';
                 if ($type == 'event') $meta_key = 'event';
                 $field_groups = TFK_Shortcodes::get_field_groups_from_posts($meta_key);
+                $list_has_data = false;
 
                 // Add editor permission variable
                 $edit_option = current_user_can('edit_pages');
@@ -96,6 +97,7 @@
                         if ($type == 'location' || empty($type)) {
                             if ($status == $loc['status'] || empty($status)) {
                                 $coming_soon = ($loc['status'] != 'open') ? '<li class="location-status">' . $loc['status'] . '</li>' : '';
+                                $list_has_data = true;
                                 $group_has_data = true;
                                 $group_output .=
                                     '<li>' .
@@ -120,23 +122,29 @@
                                 $button_text = $event['button']['text'];
                                 $button_target = $event['button']['target'];
                                 $date_event = $event['dates']['date_event'];
+                                $date_start = $event['dates']['date_start'];
+                                $date_end = $event['dates']['date_end'];
+                                $date_status = TFK_Shortcodes::get_date_status($date_start, $date_end);
                 
                                 // If type attribute is not set, or if type attribute matches custom post type
-                                $group_has_data = true;
-                                $group_output .= '
-                                    <div class="event">
-                                        <div class="left">
-                                            <div class="image"><img src="' . $content_image_src . '" alt="' . $content_image_alt . '"></div>
+                                if ($date_status == true) {
+                                    $list_has_data = true;
+                                    $group_has_data = true;
+                                    $group_output .= '
+                                        <div class="event">
+                                            <div class="left">
+                                                <div class="image"><img src="' . $content_image_src . '" alt="' . $content_image_alt . '"></div>
+                                            </div>
+                                            <div class="right">
+                                                <div class="title">' . $content_title . '</div>
+                                                <div class="date">' . $date_event . '</div>
+                                                <div class="content">' . $content_text . '</div>
+                                                <div class="link"><a href="' . $button_link . '" target="' . $button_target . '">' . $button_text . '</a></div>'
+                                                . $edit_value . '
+                                            </div>
                                         </div>
-                                        <div class="right">
-                                            <div class="title">' . $content_title . '</div>
-                                            <div class="date">' . $date_event . '</div>
-                                            <div class="content">' . $content_text . '</div>
-                                            <div class="link"><a href="' . $button_link . '" target="' . $button_target . '">' . $button_text . '</a></div>'
-                                            . $edit_value . '
-                                        </div>
-                                    </div>
-                                ';
+                                    ';
+                                }
                             }
                         }
                     }
@@ -144,7 +152,11 @@
                     if ($group_has_data == true) {
                         $output .= $group_start . $group_output . $group_end;
                     }
-                    else $output .= '<p><em>No information available at this time.</em></p>';
+                    else {
+                        if ($list_has_data == false) {
+                            $output .= '<p><em>No information available at this time.</em></p>';
+                        }
+                    }
                 }
                 $output = '<div class="tfk-list">' .  $output . '</div>';
             }
@@ -173,32 +185,36 @@
                     foreach($slides as $slide) {
                         $content = $slide['content'];
                         $button = $slide['button'];
-                        $dates = $slide['dates'];
-                        
-                        // Conditionally add slide content
-                        $image_string = '';
-                        $title_string = '';
-                        $subtitle_string = '';
-                        $text_string = '';
-                        $button_string = '';
-                        if (!empty($content['image'])) $image_string = $content['image']['url'];
-                        if (!empty($content['title'])) $title_string = '<h1>' . $content['title'] . '</h1>';
-                        if (!empty($content['subtitle'])) $subtitle_string = '<h2>' . $content['subtitle'] . '</h2>';
-                        if (!empty($content['text'])) $text_string = '<p>' . $content['text'] . '</p>';
-                        if (!empty($button['link'])) $button_string = '<a href="' . $button['link'] . '" target="' . $button['target'] . '">' . $button['text'] . '</a>';
+                        $date_event = $slide['dates']['date_event'];
+                        $date_start = $slide['dates']['date_start'];
+                        $date_end = $slide['dates']['date_end'];
+                        $date_status = TFK_Shortcodes::get_date_status($date_start, $date_end);
 
-                        $group_output .= '
-                            <div class="tfk-slide" style="background-image: url(' . $image_string . ')">
-                                <div class="item">
-                                    <div class="content">
-                                        ' . $title_string . '
-                                        ' . $subtitle_string . '
-                                        ' . $text_string . '
-                                        ' . $button_string . '
+                        // Conditionally add slide content
+                        if ($date_status == true) {
+                            $image_string = '';
+                            $title_string = '';
+                            $subtitle_string = '';
+                            $text_string = '';
+                            $button_string = '';
+                            if (!empty($content['image'])) $image_string = $content['image']['url'];
+                            if (!empty($content['title'])) $title_string = '<h1>' . $content['title'] . '</h1>';
+                            if (!empty($content['subtitle'])) $subtitle_string = '<h2>' . $content['subtitle'] . '</h2>';
+                            if (!empty($content['text'])) $text_string = '<p>' . $content['text'] . '</p>';
+                            if (!empty($button['link'])) $button_string = '<a href="' . $button['link'] . '" target="' . $button['target'] . '">' . $button['text'] . '</a>';
+                            $group_output .= '
+                                <div class="tfk-slide" style="background-image: url(' . $image_string . ')">
+                                    <div class="item">
+                                        <div class="content">
+                                            ' . $title_string . '
+                                            ' . $subtitle_string . '
+                                            ' . $text_string . '
+                                            ' . $button_string . '
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ';
+                            ';
+                        }
                     }
                 }
 
@@ -263,6 +279,19 @@
                 }
             }
             return $field_groups;
+        }
+        public function get_date_status ($date_start, $date_end) {
+            // Get date parameter for override functionality
+            if (isset($_GET['date'])) { $today = str_replace("-", "/", $_GET['date']); }
+            else { $today = date('Y-m-d'); }
+
+            // Format dates
+            if (empty($date_start)) $date_start = '01-01-2000';
+            if (empty($date_end)) $date_end = '01-01-9999';
+            $today = date('Y-m-d', strtotime($today));
+            $date_start = date('Y-m-d', strtotime($date_start));
+            $date_end = date('Y-m-d', strtotime($date_end));
+            return (($date_start <= $today) && ($today < $date_end));
         }
     }
 ?>
