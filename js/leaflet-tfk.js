@@ -38,5 +38,8 @@
         group.addTo(map);
         map.fitBounds(group.getBounds(), { padding: [16, 16], maxZoom: 16 });
         L.control.zoom({ position:'bottomright' }).addTo(map);
+
+        // Update map resize
+        setTimeout(function(){ map.invalidateSize()}, 1000);
     });
 })(jQuery);

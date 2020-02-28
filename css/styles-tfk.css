@@ -44,7 +44,7 @@
 .tfk-slider .slick-arrow.slick-next:before { content: '\203A'; }
 .tfk-slider .slick-dots { height: 64px; display: flex; align-items: center; justify-content: center; margin: 0; list-style: none; position: absolute; bottom: 0; width: 100%; line-height: 0; padding: 0; }
 .tfk-slider .slick-dots li { display: inline-block; margin: 0 4px; list-style: none; line-height: 0; }
-.tfk-slider .slick-dots li button { cursor: pointer; font-size: 0; background-color: transparent; border: 2px solid #fff; color: transparent; width: 16px; height: 16px; padding: 0; border-radius: 50%; }
+.tfk-slider .slick-dots li button { cursor: pointer; font-size: 0; background-color: transparent; border: 1px solid #fff; color: transparent; width: 16px; height: 16px; padding: 0; border-radius: 50%; }
 .tfk-slider .slick-dots li.slick-active button { background-color: #fff; }
 
 /* animations */

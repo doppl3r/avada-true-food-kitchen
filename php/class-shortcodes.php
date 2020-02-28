@@ -190,6 +190,11 @@
 
                 $output = '<div class="tfk-slider" style="padding-bottom: ' . $padding . ';">' .  $group_output . '</div>';
             }
+            else {
+                // Get general location information
+                if (!empty($data) && !empty($type)) $output = get_field($data, $post_id)[$type];
+                else $output = 'shortcode not found';
+            }
 
             // Return output value (default empty)
             return $output;
