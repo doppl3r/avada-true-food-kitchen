@@ -59,6 +59,10 @@
                 if ($type == 'event') $meta_key = 'event';
                 $field_groups = TFK_Shortcodes::get_field_groups_from_posts($meta_key);
 
+                // Add editor permission variable
+                $edit_option = current_user_can('edit_pages');
+                $edit_value = '';
+
                 // Populate group_array by list value
                 $group_array = [];
                 foreach($field_groups as $group_key => $element) {
@@ -76,14 +80,19 @@
                     $group_output = '';
                     $group_start = '';
                     $group_end = '';
-
+                    
+                    // Define group wrapper
                     if (!empty($group)) {
-                        $group_start = '<li class="group"><a class="group-title" aria-selected="false" href="#"><span class="icon"></span>' . $group_toggle . '</a><ul class="locations">';
+                        $group_start = '<li class="group"><a class="group-title" aria-selected="false" href="#"><span class="icon"></span>' . $group_toggle . '</a><ul class="group-content">';
                         $group_end = '</ul></li>';
                     }
 
                     // Loop through each group item
                     foreach($group_item as $loc_key => $loc) {
+                        // Add edit button for admin users
+                        if ($edit_option == true) $edit_value = '<a class="edit" href="/wp-admin/post.php?post=' . $loc['post_id'] . '&action=edit"><span class="dashicons dashicons-edit"></span></a>';
+                        
+                        // Build HTML by type
                         if ($type == 'location' || empty($type)) {
                             if ($status == $loc['status'] || empty($status)) {
                                 $coming_soon = ($loc['status'] != 'open') ? '<li class="location-status">' . $loc['status'] . '</li>' : '';
@@ -123,7 +132,8 @@
                                             <div class="title">' . $content_title . '</div>
                                             <div class="date">' . $date_event . '</div>
                                             <div class="content">' . $content_text . '</div>
-                                            <div class="link"><a href="' . $button_link . '" target="' . $button_target . '">' . $button_text . '</a></div>
+                                            <div class="link"><a href="' . $button_link . '" target="' . $button_target . '">' . $button_text . '</a></div>'
+                                            . $edit_value . '
                                         </div>
                                     </div>
                                 ';
@@ -229,6 +239,7 @@
                     $latitude = get_field('general', $post->ID)['latitude'];
                     $longitude = get_field('general', $post->ID)['longitude'];
                     $geo = array($latitude, $longitude);
+                    $field_groups[$index]['post_id'] = $post->ID;
                     $field_groups[$index]['title'] = get_the_title($post->ID);
                     $field_groups[$index]['link'] = get_permalink($post->ID);
                     $field_groups[$index]['status'] = get_field('general', $post->ID)['status'];
