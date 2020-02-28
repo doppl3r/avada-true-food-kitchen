@@ -1,6 +1,7 @@
 /* Leaflet - True Food Kitchen Locations Styling */
-.leaflet-container { min-height: 240px; }
-.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper { padding: 12px; border-radius: 0; }
-.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content { margin: 0; }
-.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul { margin: 0; list-style: none; }
+.leaflet-container { min-height: 240px; font-family: 'Brandon Grotesque Medium'; color: #212121; font-size: 14px; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper { padding: 12px 24px 12px 12px; border-radius: 0; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content { margin: 0; max-width: 200px; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul { margin: 0; list-style: none; padding: 0; }
 .leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li { margin: 0; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.title { font-size: 16px; font-family: 'Brandon Grotesque Bold';}

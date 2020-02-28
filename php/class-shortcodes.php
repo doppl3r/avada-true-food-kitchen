@@ -134,7 +134,7 @@
                 }
                 $output = '<div class="tfk-list">' .  $output . '</div>';
             }
-            else if ($data == 'slides') {
+            else if ($data == 'slider') {
                 // Generate array
                 $meta_key = 'slide';
                 $field_groups = TFK_Shortcodes::get_field_groups_from_posts($meta_key);
@@ -150,12 +150,12 @@
                 $height = floatval(preg_replace("/[^0-9]/", "", $height));
                 $padding = (($height / $width) * 100) . "%";
 
-                // TODO: Populate slides list with global slides page
+                // TODO: Populate slider with global slider page
 
                 // Loop through each slide
                 $group_output = '';
                 foreach($field_groups as $field_group_key => $field_group) {
-                    $slides = $field_groups[$field_group_key]['slides'];
+                    $slides = $field_groups[$field_group_key]['slider'];
                     foreach($slides as $slide) {
                         $content = $slide['content'];
                         $button = $slide['button'];
@@ -244,7 +244,7 @@
 
                 // Add events to location array if defined in shortcode
                 if ($meta_key == 'slide') {
-                    $field_groups[$index]['slides'] = get_field('slide', $post->ID);
+                    $field_groups[$index]['slider'] = get_field('slide', $post->ID);
                 }
             }
             return $field_groups;

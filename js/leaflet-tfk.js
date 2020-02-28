@@ -40,6 +40,6 @@
         L.control.zoom({ position:'bottomright' }).addTo(map);
 
         // Update map resize
-        setTimeout(function(){ map.invalidateSize()}, 1000);
+        setTimeout(function(){ map.invalidateSize(); }, 1000);
     });
 })(jQuery);
