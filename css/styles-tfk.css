@@ -34,10 +34,10 @@
 .tfk-list .event:hover .right .edit { display: block; }
 
 /* True Food Kitchen - Slick carousel styling */
-.tfk-slider { background-color: #eee; height: 0; opacity: 0; transition: all 1s ease-in-out; /* padding (height) can be changed in PHP shortcode */ }
-.tfk-slider.slick-initialized { opacity: 1; }
+.tfk-slider { background-color: #eee; height: 0; transition: all 1s ease-in-out; /* padding (height) can be changed in PHP shortcode */ }
 .tfk-slider div { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
-.tfk-slider .tfk-slide { background-size: cover; background-position: center; }
+.tfk-slider .tfk-slide { opacity: 0; background-size: cover; background-position: center; }
+.tfk-slider.slick-initialized .tfk-slide { opacity: 1; }
 .tfk-slider .tfk-slide .item { display: flex; justify-content: center; align-items: center; }
 .tfk-slider .tfk-slide .item .content { opacity: 0; position: relative; padding: 12px 48px; text-shadow: 0 0 50px #000, 0 0 50px #000; }
 .tfk-slider .tfk-slide .item .content h1 { color: #fff; font-family: 'Bernadette Rough'; text-transform: none; margin: 0; }
