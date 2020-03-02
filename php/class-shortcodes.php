@@ -73,7 +73,11 @@
                     $group_array[$group_name][] = $element;
                 }
 
+                // Sort group array alphabetically
+                ksort($group_array);
+
                 // Loop through each list group. Ex: states
+                $group_index = -1;
                 foreach($group_array as $group_key => $group_item) {
                     // Initialize single group start, content, and end
                     $group_toggle = $group_key;
@@ -81,12 +85,18 @@
                     $group_output = '';
                     $group_start = '';
                     $group_end = '';
+                    $group_index++;
                     
                     // Define group wrapper
                     if (!empty($group)) {
                         $group_start = '<li class="group"><a class="group-title" aria-selected="false" href="#"><span class="icon"></span>' . $group_toggle . '</a><ul class="group-content">';
                         $group_end = '</ul></li>';
                     }
+
+                    // Sort group item array alphabetically
+                    usort($group_item, function ($a, $b) {
+                        return strcmp($a["title"], $b["title"]);
+                    });
 
                     // Loop through each group item
                     foreach($group_item as $loc_key => $loc) {
