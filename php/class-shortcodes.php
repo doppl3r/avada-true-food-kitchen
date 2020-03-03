@@ -43,11 +43,12 @@
                 $dir = get_stylesheet_directory_uri();
 
                 // Get posts if ACF key exits
-                $meta_key = 'general';
-                $field_groups = TFK_Shortcodes::get_field_groups_from_posts($meta_key);
+                $acf_group_key = 'Location';
+                $acf_meta_key = 'general';
+                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key);
 
                 // Send array to the front end
-                wp_localize_script('leaflet-tfk', 'locations', $field_groups);
+                wp_localize_script('leaflet-tfk', 'locations', $posts);
                 wp_localize_script('leaflet-tfk', 'path', $dir);
 
                 // Render leaflet map HTML
@@ -55,10 +56,14 @@
             }
             else if ($data == 'list') {
                 // Generate array
-                $meta_key = 'general';
-                if ($type == 'event') $meta_key = 'event';
-                $field_groups = TFK_Shortcodes::get_field_groups_from_posts($meta_key);
                 $list_has_data = false;
+                $acf_group_key = 'Location';
+                $acf_meta_key = 'general';
+                if ($type == 'event') {
+                    $acf_group_key = 'Events';
+                    $acf_meta_key = 'event';
+                }
+                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key);
 
                 // Add editor permission variable
                 $edit_option = current_user_can('edit_pages');
@@ -66,7 +71,7 @@
 
                 // Populate group_array by list value
                 $group_array = [];
-                foreach($field_groups as $group_key => $element) {
+                foreach($posts as $group_key => $element) {
                     if (empty($group)) $group_id = $group_key;
                     else $group_id = $group;
                     $group_name = !empty($element[$group_id]) ? $element[$group_id] : "Other";
@@ -165,18 +170,17 @@
                     if ($group_has_data == true) {
                         $output .= $group_start . $group_output . $group_end;
                     }
-                    else {
-                        if ($list_has_data == false) {
-                            $output .= '<p><em>No information available at this time.</em></p>';
-                        }
-                    }
+                }
+                if ($list_has_data == false) {
+                    $output = '<p><em>No information available at this time.</em></p>';
                 }
                 $output = '<div class="tfk-list">' .  $output . '</div>';
             }
             else if ($data == 'slider') {
                 // Generate array
-                $meta_key = 'slide';
-                $field_groups = TFK_Shortcodes::get_field_groups_from_posts($meta_key);
+                $acf_group_key = 'Slider';
+                $acf_meta_key = 'slide';
+                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key);
 
                 // Enqueue slider libraries
                 wp_enqueue_style('slick');
@@ -193,8 +197,8 @@
 
                 // Loop through each slide
                 $group_output = '';
-                foreach($field_groups as $field_group_key => $field_group) {
-                    $slides = $field_groups[$field_group_key]['slider'];
+                foreach($posts as $field_group_key => $field_group) {
+                    $slides = $posts[$field_group_key]['slider'];
                     foreach($slides as $slide) {
                         $content = $slide['content'];
                         $button = $slide['button'];
@@ -243,23 +247,26 @@
             return $output;
         }
 
-        public function get_field_groups_from_posts($meta_key) {
-            // Limit query to a single post if current page has a $meta_key
-            if (!empty(get_field($meta_key))) $post__in = array(get_the_ID());
+        public function acf_get_posts($acf_group_key, $acf_meta_key) {
+            $groups = acf_get_field_groups(array('post_id' => get_the_ID()));
+            $acf_group_key_exists = strpos(json_encode($groups), $acf_group_key) > 0;
 
-            // Query posts if $meta_key (ACF) exists
-            $posts = get_posts(array(
+            // Limit query to a single post if current page has a $acf_meta_key
+            if ($acf_group_key_exists == true) $post__in = array(get_the_ID());
+
+            // Query posts if $acf_meta_key (ACF) exists
+            $acf_posts = get_posts(array(
                 'numberposts'	=> -1,
                 'post_type'		=> 'page',
-                'meta_key'		=> $meta_key,
+                'meta_key'		=> $acf_meta_key,
                 'post__in'      => $post__in
             ));
 
             // Generate array for JS object
-            $field_groups = array();
-            foreach($posts as $index => $post) {
+            $posts = array();
+            foreach($acf_posts as $index => $post) {
                 // Add general location info to array
-                if ($meta_key == 'general' || $meta_key == 'event') {
+                if ($acf_meta_key == 'general' || $acf_meta_key == 'event') {
                     $city = get_field('general', $post->ID)['city'];
                     $state = get_field('general', $post->ID)['state'];
                     $street = get_field('general', $post->ID)['street'];
@@ -268,32 +275,32 @@
                     $latitude = get_field('general', $post->ID)['latitude'];
                     $longitude = get_field('general', $post->ID)['longitude'];
                     $geo = array($latitude, $longitude);
-                    $field_groups[$index]['post_id'] = $post->ID;
-                    $field_groups[$index]['title'] = get_the_title($post->ID);
-                    $field_groups[$index]['link'] = get_permalink($post->ID);
-                    $field_groups[$index]['status'] = get_field('general', $post->ID)['status'];
-                    $field_groups[$index]['phone'] = get_field('general', $post->ID)['phone'];
-                    $field_groups[$index]['city'] = $city;
-                    $field_groups[$index]['state'] = $state;
-                    $field_groups[$index]['street'] = $street;
-                    $field_groups[$index]['zip'] = $zip;
-                    $field_groups[$index]['address'] = $address;
-                    $field_groups[$index]['geo'] = $geo;
+                    $posts[$index]['post_id'] = $post->ID;
+                    $posts[$index]['title'] = get_the_title($post->ID);
+                    $posts[$index]['link'] = get_permalink($post->ID);
+                    $posts[$index]['status'] = get_field('general', $post->ID)['status'];
+                    $posts[$index]['phone'] = get_field('general', $post->ID)['phone'];
+                    $posts[$index]['city'] = $city;
+                    $posts[$index]['state'] = $state;
+                    $posts[$index]['street'] = $street;
+                    $posts[$index]['zip'] = $zip;
+                    $posts[$index]['address'] = $address;
+                    $posts[$index]['geo'] = $geo;
                 }
 
                 // Add events to location array if defined in shortcode
-                if ($meta_key == 'event') {
-                    $field_groups[$index]['events'] = get_field('event', $post->ID);
+                if ($acf_meta_key == 'event') {
+                    $posts[$index]['events'] = get_field('event', $post->ID);
                 }
 
                 // Add events to location array if defined in shortcode
-                if ($meta_key == 'slide') {
-                    $field_groups[$index]['slider'] = get_field('slide', $post->ID);
+                if ($acf_meta_key == 'slide') {
+                    $posts[$index]['slider'] = get_field('slide', $post->ID);
                 }
             }
-            return $field_groups;
+            return $posts;
         }
-        public function get_date_status ($date_start, $date_end) {
+        public function get_date_status($date_start, $date_end) {
             // Get date parameter for override functionality
             if (isset($_GET['date'])) { $today = str_replace("-", "/", $_GET['date']); }
             else { $today = date('Y-m-d'); }
