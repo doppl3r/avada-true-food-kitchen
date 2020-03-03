@@ -73,7 +73,7 @@
                     $group_array[$group_name][] = $element;
                 }
 
-                // Sort group array alphabetically
+                // Sort group alphabetically
                 ksort($group_array);
 
                 // Loop through each list group. Ex: states
@@ -93,7 +93,7 @@
                         $group_end = '</ul></li>';
                     }
 
-                    // Sort group item array alphabetically
+                    // Sort locations alphabetically by title
                     usort($group_item, function ($a, $b) {
                         return strcmp($a["title"], $b["title"]);
                     });
@@ -135,6 +135,10 @@
                                 $date_start = $event['dates']['date_start'];
                                 $date_end = $event['dates']['date_end'];
                                 $date_status = TFK_Shortcodes::get_date_status($date_start, $date_end);
+
+                                // Conditionally add button html
+                                $button_html = '<div class="link"><a href="' . $button_link . '" target="' . $button_target . '">' . $button_text . '</a></div>';
+                                if (empty($button_link)) $button_html = '';
                 
                                 // If type attribute is not set, or if type attribute matches custom post type
                                 if ($date_status == true) {
@@ -148,9 +152,8 @@
                                             <div class="right">
                                                 <div class="title">' . $content_title . '</div>
                                                 <div class="date">' . $date_event . '</div>
-                                                <div class="content">' . $content_text . '</div>
-                                                <div class="link"><a href="' . $button_link . '" target="' . $button_target . '">' . $button_text . '</a></div>'
-                                                . $edit_value . '
+                                                <div class="content">' . $content_text . '</div>'
+                                                . $button_html . $edit_value . '
                                             </div>
                                         </div>
                                     ';
