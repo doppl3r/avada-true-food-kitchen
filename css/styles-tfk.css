@@ -14,6 +14,7 @@
 .tfk-list .group-content { padding: 12px 64px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.1); }
 .tfk-list .group-content > li { border-bottom: 1px solid #487426; }
 .tfk-list .group-content > li:last-of-type { border: none; }
+.tfk-list .group .event { border: none; }
 .tfk-list .location {  padding: 8px 0; }
 .tfk-list .location li { color: #4B5862; }
 .tfk-list .location li a { color: inherit !important; }
@@ -22,10 +23,10 @@
 .tfk-list .location .location-status { font-size: 12px; }
 .tfk-list .location .location-phone { font-size: 12px; }
 .tfk-list .location .location-address { font-size: 12px; }
-.tfk-list .event { background-color: rgba(255, 255, 255, 0.2); border: 1px solid #d4d4d4; display: flex; align-items: center; margin: 8px 0; }
+.tfk-list .event { background-color: rgba(255, 255, 255, 0.2); border: 1px solid #d4d4d4; display: flex; align-items: center; margin: 8px 0; position: relative; }
 .tfk-list .event .left { padding: 24px 5% 24px 10%; }
 .tfk-list .event .left img { max-width: 200px; }
-.tfk-list .event .right { padding: 24px 10% 24px 5%; text-align: left; font-size: 16px; position: relative; }
+.tfk-list .event .right { padding: 24px 10% 24px 5%; text-align: left; font-size: 16px; }
 .tfk-list .event .right .title { color: #212121; font-family: 'Brandon Grotesque Medium'; font-size: 18px; text-transform: uppercase; }
 .tfk-list .event .right .date { line-height: 16px; padding-bottom: 24px; }
 .tfk-list .event .right .content { padding-bottom: 24px; }
@@ -66,7 +67,8 @@
     .tfk-slider { height: 75vh; padding: 0; min-height: 480px; }
     .tfk-slider .tfk-slide .item .content h1 { font-size: 24px !important; line-height: 48px !important; }
     .tfk-slider .tfk-slide .item .content h2 { font-size: 56px !important; line-height: 48px !important; margin-bottom: 16px; }
+    .tfk-list .group-content { padding: 0; }
     .tfk-list .event { flex-wrap: wrap; }
-    .tfk-list .event .left { width: 100%; padding: 24px; }
+    .tfk-list .event .left { width: 100%; padding: 24px 0 0; }
     .tfk-list .event .right { width: 100%; padding: 24px; text-align: center; }
 }
