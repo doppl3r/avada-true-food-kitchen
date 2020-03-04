@@ -250,6 +250,7 @@
         public function acf_get_posts($acf_group_key, $acf_meta_key) {
             $groups = acf_get_field_groups(array('post_id' => get_the_ID()));
             $acf_group_key_exists = strpos(json_encode($groups), $acf_group_key) > 0;
+            $acf_meta_key_exists = !empty(get_field($acf_meta_key));
 
             // Limit query to a single post if current page has a $acf_meta_key
             if ($acf_group_key_exists == true) $post__in = array(get_the_ID());
