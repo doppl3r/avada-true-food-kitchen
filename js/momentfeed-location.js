@@ -10,7 +10,8 @@
                     var hoursHTML = '';
                     var hours = data.hours.split(";");
                     var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                    var address = data.address + ", " + data.addressExtended + " " + data.locality + ", " + data.region + " " + data.postcode;
+                    var address = data.address + ", " + data.locality + ", " + data.region + " " + data.postcode;
+                    var addressFull = data.address + ", " + data.addressExtended + " " + data.locality + ", " + data.region + " " + data.postcode;
 
                     for (var i = 0; i < days.length; i++) {
                         var day = hours[i].split(',');
@@ -20,7 +21,7 @@
                     }
 
                     $('.address-phone').html(data.phone);
-                    $('.address-card').html(address);
+                    $('.address-card').html(addressFull);
                     $('.address-card').attr('href', 'https://www.google.com/maps/place/' + address);
                     $('.hours-card').html(hoursHTML);
 

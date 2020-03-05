@@ -115,7 +115,7 @@
                         // Build HTML by type
                         if ($type == 'location' || empty($type)) {
                             if ($status == $loc['status'] || empty($status)) {
-                                $coming_soon = ($loc['status'] != 'open') ? '<li class="location-status">' . $loc['status'] . '</li>' : '';
+                                $coming_soon = ($loc['status'] != 'open') ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
                                 $list_has_data = true;
                                 $group_has_data = true;
                                 $group_output .=
@@ -284,6 +284,7 @@
                     $posts[$index]['title'] = get_the_title($post->ID);
                     $posts[$index]['link'] = get_permalink($post->ID);
                     $posts[$index]['status'] = get_field('general', $post->ID)['status'];
+                    $posts[$index]['description'] = get_field('general', $post->ID)['description'];
                     $posts[$index]['phone'] = get_field('general', $post->ID)['phone'];
                     $posts[$index]['city'] = $city;
                     $posts[$index]['state'] = $state;
