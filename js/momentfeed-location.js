@@ -1,16 +1,17 @@
 (function ($) {
     'use strict';
     if (momentFeedID != null) {
-        var token = 'IFWKRODYUFWLASDC';
         $(document).ready(function () {
             // Update special hours
             $.ajax({
-                url: 'https://momentfeed-prod.apigee.net/lf/location/store-info/' + momentFeedID + '?auth_token=' + token,
+                url: 'https://momentfeed-prod.apigee.net/lf/location/store-info/' + momentFeedID,
                 type: 'GET',
                 success: function (data) {
                     var hoursHTML = '';
                     var hours = data.hours.split(";");
                     var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                    var address = data.address + ", " + data.addressExtended + " " + data.locality + ", " + data.region + " " + data.postcode;
+
                     for (var i = 0; i < days.length; i++) {
                         var day = hours[i].split(',');
                         var open = convertMilitaryTime(day[1]);
@@ -19,7 +20,8 @@
                     }
 
                     $('.address-phone').html(data.phone);
-                    $('.address-card').html(data.address + ", " + data.addressExtended + " " + data.locality + ", " + data.region + " " + data.postcode);
+                    $('.address-card').html(address);
+                    $('.address-card').attr('href', 'https://www.google.com/maps/place/' + address);
                     $('.hours-card').html(hoursHTML);
 
                     // Add special hours
