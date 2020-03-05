@@ -8,9 +8,11 @@
     function renderMomentfeedMenus(menusArray) {
         var proxy = '';
         var apiUrl = "https://momentfeed-prod.apigee.net/menu/account/" + accountId + "/menus?auth_token=" + token;
+        $('#menu_tabs').addClass('loading');
         if (window.location.href.includes('truefoodkitchen.com') == false) proxy = 'https://cors-anywhere.herokuapp.com/';
         $.getJSON(proxy + apiUrl).done(
             function (data) {
+                $('#menu_tabs').removeClass('loading');
                 menus = data.data;
                 $.each(menusArray, function (i, e) { handleMenu(menusArray[i]); });
             }).fail(function (xhr, status, error) { console.error("error: " + xhr.responseText); });
@@ -31,41 +33,6 @@
     }
     function handleItem(item, sectionId) {
         $("#section-" + sectionId + "").append("<li>" + "<div class='item_container'>" + "<p class='item_name'>" + (item.displayName.indexOf('**') == 0 ? "<img id='seasonal-img' src='/wp-content/uploads/2020/03/icon_menu_seasonal.png'>" : "") + item.displayName.replace('**', '') + "</p>" + ((item.price.amount === "") ? "" : "<p>$" + item.price.amount + "</p>") + "</div>" + "<p class='item_description'>" + item.description + "</p>" + "</li>");
-    }
-    function renderMomentfeedLocationSpecialHours(locationId) {
-        var apiUrl = "https://momentfeed-prod.apigee.net/lf/location/store-info/" + locationId + "?auth_token=" + token;
-        $.getJSON(apiUrl)
-            .done(function (data) {
-                if (!data.specialHours) return false;
-                var specialHours = data.specialHours.split(';');
-                if (specialHours.length > 1) {
-                    $('.fullmap2').height(500);
-                    $('.fullmap2 iframe').height(500);
-                    $('.noo-address-info-wrap .address-info').height(460);
-                }
-                $.each(specialHours, function (i, e) {
-                    var specialHoursItem = specialHours[i].split(',');
-                    console.log(specialHoursItem);
-                    if (specialHoursItem.length === 1 && specialHoursItem[0] == "") return;
-                    var itemDate = specialHoursItem[0].split('-');
-                    var itemMonthDay = itemDate[1] + "/" + itemDate[2];
-                    if (specialHoursItem.length > 2) {
-                        var timeOfDayStart = "am";
-                        var itemDateHourStart = specialHoursItem[1].substr(0, 2);
-                        if (itemDateHourStart >= 12) { itemDateHourStart -= 12; timeOfDayStart = "pm"; }
-                        var itemDateMinStart = specialHoursItem[1].substr(3, 2);
-                        if (itemDateMinStart == "0") { itemDateMinStart = "00"; }
-                        var timeOfDayStart = "am";
-                        var itemDateHourEnd = specialHoursItem[2].substr(0, 2);
-                        if (itemDateHourEnd >= 12) { itemDateHourEnd -= 12; timeOfDayEnd = "pm"; }
-                        var itemDateMinEnd = specialHoursItem[2].substr(3, 2);
-                        if (itemDateMinEnd == "0") { itemDateMinEnd = "00"; }
-                        $("#special-hours dl").append("<dt><span>" + itemMonthDay + "</span></dt><dd><span><span>" + itemDateHourStart + ":" + itemDateMinStart + timeOfDayStart + " -</span><span>" + itemDateHourEnd + ":" + itemDateMinEnd + timeOfDayEnd + "</span></span></dd>");
-                    }
-                    else { $("#special-hours dl").append("<dt><span>" + itemMonthDay + "</span></dt><dd><span><span>" + specialHoursItem[1] + "</span></span></dd>"); }
-                    $("#special-hours").show();
-                });
-            }).fail(function (xhr, status, error) { console.error("error: " + xhr.responseText); });
     }
     $('#menu_tabs').on('keydown', function (e) {
         if (e.which === 37 || e.which === 38 || (e.which === 33 && e.ctrlKey)) { //left/up/ctrl+pageup
