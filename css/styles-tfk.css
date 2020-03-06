@@ -9,6 +9,7 @@
 .tfk-list .group.state .group-title { text-transform: uppercase; }
 .tfk-list .group-title .icon { width: 26px; height: 36px; background-color: #f3f3f3; border-radius: 5px; margin-right: 20px; display: inline-flex; align-items: center; justify-content: center; vertical-align: bottom;  }
 .tfk-list .group-title .icon:after { content: ''; width: 8px; height: 8px; border: 2px solid #252525; display: inline-block; border-left-color: transparent !important; border-bottom-color: transparent !important; transform: rotate(45deg); transition: all 0.25s ease-in-out; margin-left: -6px; }
+.tfk-list .group-title[aria-selected]:hover,
 .tfk-list .group-title[aria-selected="true"] { background-color: #f3f3f3; color: #487426 !important; }
 .tfk-list .group-title[aria-selected="true"] .icon { background-color: #487426; }
 .tfk-list .group-title[aria-selected="true"] .icon:after { transform: rotate(135deg); border-color: #fff; margin: -8px 0 0 0; }

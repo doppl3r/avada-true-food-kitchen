@@ -36,7 +36,7 @@
 
         // zoom settings
         group.addTo(window.map);
-        window.map.fitBounds(group.getBounds(), { padding: [16, 16], maxZoom: 16 });
+        window.map.fitBounds(group.getBounds(), { padding: [4, 4], maxZoom: 16 });
         L.control.zoom({ position:'bottomright' }).addTo(window.map);
 
         // Update map resize when scrolling is triggered
