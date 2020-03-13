@@ -60,10 +60,10 @@
                 $list_has_data = false;
                 $acf_group_key = 'Location';
                 $acf_meta_key = 'general';
-                if ($type == 'event') {
-                    $acf_group_key = 'Events';
-                    $acf_meta_key = 'event';
-                }
+
+                // Get posts by type
+                if ($type == 'event') { $acf_group_key = 'Events'; $acf_meta_key = 'event'; }
+                else if ($type == 'catering') { $acf_group_key = 'Catering'; $acf_meta_key = 'document'; }
                 $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key);
 
                 // Add editor permission variable
@@ -126,6 +126,18 @@
                                             $coming_soon .
                                             $telephone .
                                             '<li class="location-address"><a href="https://www.google.com/maps/place/' . $loc['address'] . '" target="_blank">' . $loc['address'] . '</a></li>' .
+                                        '</ul>' .
+                                    '</li>';
+                            }
+                        }
+                        else if ($type == 'catering') {
+                            if ($status == $loc['status'] || empty($status)) {
+                                $list_has_data = true;
+                                $group_has_data = true;
+                                $group_output .=
+                                    '<li>' .
+                                        '<ul class="catering">' .
+                                            '<li class="catering-title"><a href="' . $loc['catering']['url'] . '" target="_blank">' . $loc['title'] . '</a></li>' .
                                         '</ul>' .
                                     '</li>';
                             }
@@ -243,6 +255,13 @@
 
                 $output = '<div class="tfk-slider" style="padding-bottom: ' . $padding . ';">' .  $group_output . '</div>';
             }
+            else if ($data == 'catering') {
+                // Get catering PDF for single location
+                $acf_group_key = 'Catering';
+                $acf_meta_key = 'document';
+                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key);
+                $output = $posts[0]['catering']['url'];
+            }
             else {
                 // Get general location information
                 if (!empty($data) && !empty($type)) $output = get_field($data, $post_id)[$type];
@@ -273,7 +292,7 @@
             $posts = array();
             foreach($acf_posts as $index => $post) {
                 // Add general location info to array
-                if ($acf_meta_key == 'general' || $acf_meta_key == 'event') {
+                if ($acf_meta_key == 'general' || $acf_meta_key == 'event' || $acf_meta_key == 'document') {
                     $city = get_field('general', $post->ID)['city'];
                     $state = get_field('general', $post->ID)['state'];
                     $street = get_field('general', $post->ID)['street'];
@@ -299,6 +318,11 @@
                 // Add events to location array if defined in shortcode
                 if ($acf_meta_key == 'event') {
                     $posts[$index]['events'] = get_field('event', $post->ID);
+                }
+
+                // Add events to location array if defined in shortcode
+                if ($acf_meta_key == 'document') {
+                    $posts[$index]['catering'] = get_field('document', $post->ID);
                 }
 
                 // Add events to location array if defined in shortcode
