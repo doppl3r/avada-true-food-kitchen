@@ -37,6 +37,9 @@
 .tfk-list .event .right .link a:hover { background-color: #fff; border-color: #487426; color: #487426 !important; }
 .tfk-list .event .right .edit { position: absolute; top: 10px; right: 10px; display: none; padding: 4px; }
 .tfk-list .event:hover .right .edit { display: block; }
+.tfk-list.type-catering .group-content > li { border-color: #edf1e9; }
+.tfk-list.type-catering .catering a { padding: 12px; display: inline-block; color: #212121 !important; }
+.tfk-list.type-catering .catering a:after { color: #de0b3b !important; content: '\f1c1'; font-family: 'Font Awesome 5 Free'; padding: 0 8px; }
 
 /* True Food Kitchen - Slick carousel styling */
 .tfk-slider { background-color: #eee; height: 0; transition: all 1s ease-in-out; /* padding (height) can be changed in PHP shortcode */ }

@@ -192,7 +192,7 @@
                 if ($list_has_data == false) {
                     $output = '<p><em>No information available at this time.</em></p>';
                 }
-                $output = '<div class="tfk-list">' .  $output . '</div>';
+                $output = '<div class="tfk-list type-' . $type . '">' .  $output . '</div>';
             }
             else if ($data == 'slider') {
                 // Generate array
