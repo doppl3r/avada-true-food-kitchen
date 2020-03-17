@@ -35,7 +35,7 @@
 			slider.on('afterChange', function(event, slick){
 				
 			});
-			slider.slick({ autoplay: true, dots: true, speed: 1000, fade: true });
+			slider.slick({ autoplay: true, autoplaySpeed: 5000, dots: true, speed: 1000, fade: true, pauseOnHover: false });
 		}
 	});
 	
