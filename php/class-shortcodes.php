@@ -262,6 +262,16 @@
                 $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key);
                 $output = $posts[0]['catering']['url'];
             }
+            else if ($data == 'achecker') {
+                $href = 'https://achecker.ca/checker/index.php';
+                $id = get_field('achecker');
+                if (!empty($id)) $href .= '?uri=referer&gid=WCAG2-AA&id=' . $id;
+                $output = '
+                    <a class="achecker" href="' . $href . '" target="_blank">
+                        <img src="https://achecker.ca/images/icon_W2_aa.jpg" alt="WCAG 2.0 (Level AA)" height="32" width="102" />
+                    </a>
+                ';
+            }
             else {
                 // Get general location information
                 if (!empty($data) && !empty($type)) $output = get_field($data, $post_id)[$type];
