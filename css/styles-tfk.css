@@ -70,7 +70,7 @@
 .tfk-slider .slick-dots li { display: inline-block; margin: 0 4px; list-style: none; line-height: 0; }
 .tfk-slider .slick-dots li button { cursor: pointer; font-size: 0; background-color: transparent; border: 1px solid #fff; color: transparent; width: 16px; height: 16px; padding: 0; border-radius: 50%; }
 .tfk-slider .slick-dots li.slick-active button { background-color: #fff; }
-.tfk-slider .slick-dots .slider-toggle { background-color: #487426; color: #fff !important; height: 16px; line-height: 16px; font-size: 12px; padding: 0 4px; margin: 0 4px; text-transform: uppercase; font-family: 'Brandon Grotesque Bold'; }
+.tfk-slider .slick-dots .slider-toggle { background-color: #487426; color: #fff !important; height: 16px; line-height: 16px; font-size: 12px; padding: 0 4px; margin: 0 4px; text-transform: uppercase; font-family: 'Brandon Grotesque Bold'; text-decoration: none; }
 
 /* animations */
 @keyframes fade-in { 0% { opacity: 0; transform: translateY(64px); } 100% { opacity: 1; transform: translateY(0px); } }
