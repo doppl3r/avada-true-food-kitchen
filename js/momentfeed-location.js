@@ -19,14 +19,22 @@
                     var hours = data.hours.split(";");
                     var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
                     for (var i = 0; i < days.length; i++) {
-                        var open = 'Temporarily';
-                        var close = 'Closed';
+                        var dayHTML = '<span class="day">' + days[i] + '</span>';
+                        var open = 'Closed'; // Default closed
+                        var openHTML = '<span class="hour-open">' + open + '</span>';
+                        var close = '';
+                        var closeHTML = '';
+
+                        // Check if hours exist from MomentFeed
                         if (data.hours.length > 0) {
                             var day = hours[i].split(',');
                             open = convertMilitaryTime(day[1]);
                             close = convertMilitaryTime(day[2]);
+                            dayHTML = '<span class="day">' + days[i] + '</span>';
+                            openHTML = '<span class="hour-open">' + open + '</span>';
+                            closeHTML = '<span class="hour-close">' + close + '</span>';
                         }
-                        hoursHTML += '<div class="day-row"><span class="day">' + days[i] + '</span><span class="hour-open">' + open + '</span><span class="hour-close">' + close + '</span></div>';
+                        hoursHTML += '<div class="day-row">' + dayHTML + openHTML + closeHTML + '</div>';
                     }
                     $('.hours-card').html(hoursHTML);
 
@@ -36,12 +44,15 @@
                         var specialtyHours = data.specialHours.split(';');
                         $.each(specialtyHours, function (i, e) {
                             var specialtyItem = specialtyHours[i].split(',');
-                            var day = specialtyItem[0];
-                            var open = specialtyItem[1];
-                            var close = specialtyItem[2];
+                            var day = specialtyItem[0], dayHTML = '';
+                            var open = specialtyItem[1], openHTML = '';
+                            var close = specialtyItem[2], closeHTML = '';
                             if (day.length > 0) {
                                 day = day.substring(day.indexOf('-') + 1);
-                                specialtyHoursHTML += '<div class="day-row"><span class="day">' + day + '</span><span class="hour-open">' + open + '</span><span class="hour-close">' + close + '</span></div>';
+                                if (day != null) dayHTML = '<span class="day">' + day + '</span>';
+                                if (open != null) openHTML = '<span class="hour-open">' + open + '</span>';
+                                if (close != null) closeHTML = '<span class="hour-close">' + close + '</span>';
+                                specialtyHoursHTML += '<div class="day-row">' + dayHTML + openHTML + closeHTML + '</div>';
                             }
                         });
                         $(".special-hours-card").html('<strong>Specialty Hours:</strong>');
