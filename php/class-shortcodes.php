@@ -198,7 +198,7 @@
                 // Generate array
                 $acf_group_key = 'Slider';
                 $acf_meta_key = 'slide';
-                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key);
+                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key, $atts);
 
                 // Enqueue slider libraries
                 wp_enqueue_style('slick');
@@ -210,8 +210,6 @@
                 $width = floatval(preg_replace("/[^0-9]/", "", $width));
                 $height = floatval(preg_replace("/[^0-9]/", "", $height));
                 $padding = (($height / $width) * 100) . "%";
-
-                // TODO: Populate slider with global slider page
 
                 // Loop through each slide
                 $group_output = '';
@@ -282,13 +280,16 @@
             return $output;
         }
 
-        public function acf_get_posts($acf_group_key, $acf_meta_key) {
+        public function acf_get_posts($acf_group_key, $acf_meta_key, $atts = null) {
             $groups = acf_get_field_groups(array('post_id' => get_the_ID()));
             $acf_group_key_exists = strpos(json_encode($groups), $acf_group_key) > 0;
             $acf_meta_key_exists = !empty(get_field($acf_meta_key));
 
             // Limit query to a single post if current page has a $acf_meta_key
             if ($acf_group_key_exists == true) $post__in = array(get_the_ID());
+
+            // Allow multiple post id's
+            if (isset($atts['id'])) $post__in = preg_split('/, ?/', $atts['id']);
 
             // Query posts if $acf_meta_key (ACF) exists
             $acf_posts = get_posts(array(
