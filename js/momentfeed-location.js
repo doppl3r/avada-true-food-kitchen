@@ -20,9 +20,9 @@
                     var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
                     for (var i = 0; i < days.length; i++) {
                         var dayHTML = '<span class="day">' + days[i] + '</span>';
-                        var open = 'Closed'; // Default closed
-                        var openHTML = '<span class="hour-open">' + open + '</span>';
+                        var open = '';
                         var close = '';
+                        var openHTML = '<span class="hour-open">Closed</span>'; // Default closed
                         var closeHTML = '';
 
                         // Check if hours exist from MomentFeed
