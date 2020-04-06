@@ -55,9 +55,11 @@
                                 specialtyHoursHTML += '<div class="day-row">' + dayHTML + openHTML + closeHTML + '</div>';
                             }
                         });
+                        $(".special-hours-card").fadeIn(); // Reveal hidden div
                         $(".special-hours-card").html('<strong>Specialty Hours:</strong>');
                         $(".special-hours-card").append(specialtyHoursHTML);
                     }
+                    else { $(".special-hours-card").fadeOut() }
                     /* if (!data.specialHours) return false;
                     var specialHours = data.specialHours.split(';');
                     $.each(specialHours, function (i, e) {
