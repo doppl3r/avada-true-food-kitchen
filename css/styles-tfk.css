@@ -42,7 +42,7 @@
 .tfk-list.type-catering .catering a:after { color: #de0b3b !important; content: '\f1c1'; font-family: 'Font Awesome 5 Free'; padding: 0 8px; }
 
 /* True Food Kitchen - Slick carousel styling */
-.tfk-slider { background-color: #eee; height: 0; transition: all 1s ease-in-out; /* padding (height) can be changed in PHP shortcode */ }
+.tfk-slider { background-color: #eee; transition: all 0.5s ease-in-out; min-height: 480px; padding: 0 !important; height: 60vh !important; }
 .tfk-slider div { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
 .tfk-slider .tfk-slide { opacity: 0; background-size: cover; background-position: center; }
 .tfk-slider.slick-initialized .tfk-slide { opacity: 1; }
