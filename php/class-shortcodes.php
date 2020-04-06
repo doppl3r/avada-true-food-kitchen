@@ -251,7 +251,7 @@
                     }
                 }
 
-                $output = '<div class="tfk-slider" style="padding-bottom: ' . $padding . ';">' .  $group_output . '</div>';
+                $output = '<div class="tfk-slider">' .  $group_output . '</div>';
             }
             else if ($data == 'catering') {
                 // Get catering PDF for single location
