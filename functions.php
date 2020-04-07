@@ -12,3 +12,7 @@
 	// Initialize resources object
 	require_once 'php/class-resources.php';
 	$tfk_resources = new TFK_Resources();
+
+	// Add global popup behavior
+	require_once 'php/class-popups.php';
+	$tfk_popups = new TFK_Popups();
