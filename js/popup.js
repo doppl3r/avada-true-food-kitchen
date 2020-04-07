@@ -16,14 +16,14 @@
 			// Check cookie for cookie attribute
 			if (cookie == null || Cookies.get(cookie) != 'false') {
 				// Add popup
-				$('body').addClass('disable');
+				$('html').addClass('disable');
                 $('.popup-alert').addClass('active');
                 $('.close-popup').focus();
 
 				// Add popup functionality (and set cookie)
 				$('.close-popup').on('click', function(e){
 					e.preventDefault();
-					$('body').removeClass('disable');
+					$('html').removeClass('disable');
 					$(this).closest('.popup-alert').removeClass('active');
 					Cookies.set(cookie, 'false', { expires: 1 })
 				});
