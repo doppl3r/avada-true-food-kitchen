@@ -24,7 +24,7 @@
             $content = '';
 
             // Search folder for popups that match the URL
-            $popups = glob($path . '/html/popup-*', GLOB_BRACE);
+            $popups = glob($path . '/html/popup-*');
             foreach ($popups as $item) {
                 $name = pathinfo($item)['filename'];
                 $name = substr($name, strpos($name, '-') + 1);
