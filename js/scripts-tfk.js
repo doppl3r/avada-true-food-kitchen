@@ -17,7 +17,7 @@
 				// Add pause toggle button
 				var slideStateHTML = $('<a href="#" class="slider-toggle" aria-label="pause">pause</a>');
 				$(this).addClass('animating');
-				$('.slick-dots').append(slideStateHTML);
+				$(this).find('.slick-dots').append(slideStateHTML);
 				slideStateHTML.on('click', function(e) {
 					e.preventDefault();
 					var slideState = slideStateHTML.text();
