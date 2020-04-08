@@ -14,7 +14,7 @@
 		// Check if within date range
 		if (currentDate < endDate) {
 			// Check cookie for cookie attribute
-			if (cookie == null || Cookies.get(cookie) != 'false') {
+			if (Cookies.get(cookie) != 'false' || cookie == null) {
 				// Add popup
 				$('html').addClass('disable');
                 $('.popup-alert').addClass('active');
@@ -25,7 +25,7 @@
 					e.preventDefault();
 					$('html').removeClass('disable');
 					$(this).closest('.popup-alert').removeClass('active');
-					Cookies.set(cookie, 'false', { expires: 1 })
+					if (cookie != null) Cookies.set(cookie, 'false', { expires: 1 })
 				});
 			}
 		}
