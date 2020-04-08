@@ -5,7 +5,7 @@
 .tfk-list li ul li { margin: 0; padding: 0; }
 .tfk-list li > [aria-selected="false"] + ul { display: none; }
 .tfk-list .group { margin-bottom: 4px; }
-.tfk-list .group-title { background-color: #fff; color: #252525 !important; font-family: 'Brandon Grotesque Bold'; font-size: 18px; display: block; padding: 12px 16px; border-radius: 0px; align-items: center; position: relative; }
+.tfk-list .group-title { background-color: #fff; border: none; color: #252525 !important; font-family: 'Brandon Grotesque Bold'; font-size: 18px; display: block; padding: 12px 16px; border-radius: 0px; align-items: center; position: relative; }
 .tfk-list .group.state .group-title { text-transform: uppercase; }
 .tfk-list .group-title .icon { width: 26px; height: 36px; background-color: #f3f3f3; border-radius: 0px; margin-right: 20px; display: inline-flex; align-items: center; justify-content: center; vertical-align: bottom;  }
 .tfk-list .group-title .icon:after { content: ''; width: 8px; height: 8px; border: 2px solid #252525; display: inline-block; border-left-color: transparent !important; border-bottom-color: transparent !important; transform: rotate(45deg); transition: all 0.25s ease-in-out; margin-left: -6px; }
