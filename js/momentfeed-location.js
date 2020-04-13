@@ -4,7 +4,7 @@
         $(document).ready(function () {
             // Update special hours
             $.ajax({
-                url: 'https://momentfeed-prod.apigee.net/lf/location/store-info/' + momentFeedID,
+                url: 'https://momentfeed-prod.apigee.net/lf/location/store-info/' + momentFeedID + '?auth_token=IFWKRODYUFWLASDC',
                 type: 'GET',
                 success: function (data) {
                     // Update phone and address
@@ -40,6 +40,7 @@
 
                     // Add special hours
                     if (data.specialHours.length > 0) {
+                        var hasFutureDates = false; // Default no future dates
                         var specialtyHoursHTML = '';
                         var specialtyHours = data.specialHours.split(';');
                         $.each(specialtyHours, function (i, e) {
@@ -48,16 +49,23 @@
                             var open = specialtyItem[1], openHTML = '';
                             var close = specialtyItem[2], closeHTML = '';
                             if (day.length > 0) {
-                                day = day.substring(day.indexOf('-') + 1);
-                                if (day != null) dayHTML = '<span class="day">' + day + '</span>';
-                                if (open != null) openHTML = '<span class="hour-open">' + open + '</span>';
-                                if (close != null) closeHTML = '<span class="hour-close">' + close + '</span>';
-                                specialtyHoursHTML += '<div class="day-row">' + dayHTML + openHTML + closeHTML + '</div>';
+                                var today = new Date().setHours(0,0,0,0);
+                                var date = new Date(day).setHours(0,0,0,0);
+                                if (today <= date) {
+                                    hasFutureDates = true;
+                                    day = day.substring(day.indexOf('-') + 1);
+                                    if (day != null) dayHTML = '<span class="day">' + day + '</span>';
+                                    if (open != null) openHTML = '<span class="hour-open">' + open + '</span>';
+                                    if (close != null) closeHTML = '<span class="hour-close">' + close + '</span>';
+                                    specialtyHoursHTML += '<div class="day-row">' + dayHTML + openHTML + closeHTML + '</div>';
+                                }
                             }
                         });
-                        $(".special-hours-card").fadeIn(); // Reveal hidden div
-                        $(".special-hours-card").html('<strong>Specialty Hours:</strong>');
-                        $(".special-hours-card").append(specialtyHoursHTML);
+                        if (hasFutureDates == true) {
+                            $(".special-hours-card").fadeIn(); // Reveal hidden div
+                            $(".special-hours-card").html('<strong>Specialty Hours:</strong>');
+                            $(".special-hours-card").append(specialtyHoursHTML);
+                        }
                     }
                     else { $(".special-hours-card").fadeOut() }
                     /* if (!data.specialHours) return false;
