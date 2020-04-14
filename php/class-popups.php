@@ -40,7 +40,7 @@
                     <!-- Edit popup: /wp-content/themes/avada-true-food-kitchen/html/ -->
                     <div class="wrapper">
                         <div class="title">
-                            <img src="' . $dir . '/img/tfk-logo.png">
+                            <img src="' . $dir . '/img/tfk-logo.png" alt="True Food Kitchen logo">
                         </div>
                         <div class="content">' . $content . '</div>
                     </div>
