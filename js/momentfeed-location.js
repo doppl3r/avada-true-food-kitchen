@@ -51,13 +51,13 @@
                             if (day.length > 0) {
                                 var today = new Date().setHours(0,0,0,0);
                                 var date = new Date(day).setHours(0,0,0,0);
-                                if (today <= date) {
-                                    hasFutureDates = true;
+                                if (today <= (date + 86400000)) {
                                     day = day.substring(day.indexOf('-') + 1);
                                     if (day != null) dayHTML = '<span class="day">' + day + '</span>';
                                     if (open != null) openHTML = '<span class="hour-open">' + open + '</span>';
                                     if (close != null) closeHTML = '<span class="hour-close">' + close + '</span>';
                                     specialtyHoursHTML += '<div class="day-row">' + dayHTML + openHTML + closeHTML + '</div>';
+                                    hasFutureDates = true;
                                 }
                             }
                         });
