@@ -14,9 +14,20 @@
             function (data) {
                 $('#menu_tabs').removeClass('loading');
                 var sections = data.data[0].sections;
+                addFullMenu(sections);
                 $.each(sections, function (i, e) { handleMenu(sections[i], i); });
             }).fail(function (xhr, status, error) { console.error("error: " + xhr.responseText);
         });
+    }
+    function addFullMenu(sections) {
+        var items = [];
+        for (var sectionIndex = 0; sectionIndex < sections.length; sectionIndex++) {
+            for (var itemIndex = 0; itemIndex < sections[sectionIndex].items.length; itemIndex++) {
+                items.push(sections[sectionIndex].items[itemIndex]);
+            }
+        }
+        sections.unshift({ "id": 0, "displayName": "Full", "description": null, "items": [] });
+        sections[0].items = items;
     }
     function handleMenu(section, sectionIndex) {
         $("ul#menu_tabs").append('<li class="primary_menu_tab ' + (tabIndex === 0 ? "active" : "inactive") + '" role="tab" aria-selected="' + (tabIndex === 0 ? "true" : "false") + '" rel="' + sectionIndex + '" tabindex="' + tabIndex + '" aria-controls="' + sectionIndex + '">' + section.displayName + '</li > ');
