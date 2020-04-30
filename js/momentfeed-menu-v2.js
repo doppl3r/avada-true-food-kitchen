@@ -38,7 +38,18 @@
         tabIndex = -1;
     }
     function handleItem(item, sectionIndex) {
-        $("#section-" + sectionIndex + "").append("<li>" + "<div class='item_container'>" + "<p class='item_name'>" + (item.displayName.indexOf('**') == 0 ? "<img id='seasonal-img' src='/wp-content/uploads/2020/03/icon_menu_seasonal.png'>" : "") + item.displayName.replace('**', '') + "</p>" + ((item.price.amount === "") ? "" : "<p>$" + item.price.amount + "</p>") + "</div>" + "<p class='item_description'>" + item.description + "</p>" + "</li>");
+        $("#section-" + sectionIndex + "").append(
+            "<li>" + 
+                "<div class='item_container'>" + 
+                    "<p class='item_name'>" + 
+                        (item.displayName.indexOf('**') == 0 ? "<img id='seasonal-img' src='/wp-content/uploads/2020/03/icon_menu_seasonal.png'>" : "") + 
+                        item.displayName.replace('**', '') + 
+                    "</p>" + 
+                "</div>" + 
+                "<p class='item_description'>" + item.description + 
+                "</p>" + 
+            "</li>"
+        );
     }
     $('#menu_tabs').on('keydown', function (e) {
         if (e.which === 37 || e.which === 38 || (e.which === 33 && e.ctrlKey)) { //left/up/ctrl+pageup
