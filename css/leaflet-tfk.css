@@ -4,4 +4,7 @@
 .leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content { margin: 0; max-width: 200px; }
 .leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul { margin: 0; list-style: none; padding: 0; }
 .leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li { margin: 0; }
-.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.title { font-size: 16px; font-family: 'Brandon Grotesque Bold';}
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.title { font-size: 16px; font-family: 'Brandon Grotesque Bold'; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.description { color: #487426; font-weight: bold; margin-bottom: 4px; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.link a { text-transform: uppercase; color: #212121 !important; font-size: 12px; background-color: #eee; padding: 4px 8px; display: inline-block; margin-top: 4px; transition: 0s; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.link a:hover { background-color: #487426; color: #fff !important; }

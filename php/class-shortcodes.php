@@ -115,7 +115,7 @@
                         // Build HTML by type
                         if ($type == 'location' || empty($type)) {
                             if ($status == $loc['status'] || empty($status)) {
-                                $coming_soon = ($loc['status'] != 'open') ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
+                                $description = ($loc['status'] != 'open') ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
                                 $telephone = !empty($loc['phone']) ? '<li class="location-phone"><a href="tel:' . $loc['phone'] . '">' . $loc['phone'] . '</a></li>' : '';
                                 $list_has_data = true;
                                 $group_has_data = true;
@@ -123,7 +123,7 @@
                                     '<li>' .
                                         '<ul class="location">' .
                                             '<li class="location-title"><a href="' . $loc['link'] . '">' . $loc['title'] . '</a></li>' .
-                                            $coming_soon .
+                                            $description .
                                             $telephone .
                                             '<li class="location-address"><a href="https://www.google.com/maps/place/' . $loc['address'] . '" target="_blank">' . $loc['address'] . '</a></li>' .
                                         '</ul>' .

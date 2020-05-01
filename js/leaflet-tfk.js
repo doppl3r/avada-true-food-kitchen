@@ -14,6 +14,7 @@
         var group = new L.featureGroup([]);
         locations.forEach(function(value){
             var name = value['title'];
+            var description = value['description'];
             var address = value['address'];
             var phone = value['phone'];
             var link = value['link'];
@@ -25,6 +26,7 @@
                 marker.bindPopup(
                     '<ul>' +
                         '<li class="title">'+ name + '</li>' +
+                        '<li class="description">'+ description + '</li>' +
                         '<li class="address">'+ address + '</li>' +
                         '<li class="phone">'+ phone + '</li>' +
                         '<li class="link"><a href="'+ link + '">View Location</a></li>' +
