@@ -57,7 +57,7 @@
 .tfk-slider.animating .tfk-slide .item .content * { animation: fade-in 1s ease-in-out; animation-fill-mode: forwards; }
 .tfk-slider.animating .tfk-slide .item .content h1 { animation-delay: 0.25s; }
 .tfk-slider.animating .tfk-slide .item .content h2 { animation-delay: 0.5s; }
-.tfk-slider.animating .tfk-slide .item .content p { animation-delay: 0.75s; }
+.tfk-slider.animating .tfk-slide .item .content p { animation-delay: 0.75s; text-shadow: 0 0 10px #000, 0 0 10px #000; }
 .tfk-slider.animating .tfk-slide .item .content a { animation-delay: 1.0s; }
 .tfk-slider .slick-arrow { cursor: pointer; opacity: 0; background-color: #fff; border-radius: 50%; border: none; position: absolute; top: calc(50% - 16px); z-index: 1; font-size: 0; width: 32px; height: 32px; text-decoration: none; }
 .tfk-slider:hover .slick-arrow, .slick-slider .slick-arrow:focus { opacity: 1; }
