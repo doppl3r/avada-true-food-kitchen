@@ -18,6 +18,8 @@
             var address = value['address'];
             var phone = value['phone'];
             var link = value['link'];
+            var online_ordering = value['online_ordering'];
+            var online_ordering_link = (online_ordering.length > 0) ? '<a href="'+ online_ordering + '" class="order-online">Order Online</a>' : '';
             var geo = value['geo'];
 
             // Add icon if geo coordinates exist
@@ -29,7 +31,7 @@
                         '<li class="description">'+ description + '</li>' +
                         '<li class="address">'+ address + '</li>' +
                         '<li class="phone">'+ phone + '</li>' +
-                        '<li class="link"><a href="'+ link + '">View Location</a></li>' +
+                        '<li class="links">' + '<a href="'+ link + '">View More</a>' + online_ordering_link + '</li>' +
                     '</ul>'
                 );
             }

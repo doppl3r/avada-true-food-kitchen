@@ -117,6 +117,7 @@
                             if ($status == $loc['status'] || empty($status)) {
                                 $description = ($loc['status'] != 'open') ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
                                 $telephone = !empty($loc['phone']) ? '<li class="location-phone"><a href="tel:' . $loc['phone'] . '">' . $loc['phone'] . '</a></li>' : '';
+                                $order_online = !empty($loc['online_ordering']) ? '<li class="location-order-online"><a href="' . $loc['online_ordering'] . '">Order Online</a></li>' : '';
                                 $list_has_data = true;
                                 $group_has_data = true;
                                 $group_output .=
@@ -126,6 +127,7 @@
                                             $description .
                                             $telephone .
                                             '<li class="location-address"><a href="https://www.google.com/maps/place/' . $loc['address'] . '" target="_blank">' . $loc['address'] . '</a></li>' .
+                                            $order_online .
                                         '</ul>' .
                                     '</li>';
                             }
@@ -318,6 +320,7 @@
                     $posts[$index]['link'] = get_permalink($post->ID);
                     $posts[$index]['status'] = get_field('general', $post->ID)['status'];
                     $posts[$index]['description'] = get_field('general', $post->ID)['description'];
+                    $posts[$index]['online_ordering'] = get_field('general', $post->ID)['online_ordering'];
                     $posts[$index]['phone'] = get_field('general', $post->ID)['phone'];
                     $posts[$index]['city'] = $city;
                     $posts[$index]['state'] = $state;
