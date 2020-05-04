@@ -296,7 +296,8 @@
                 'numberposts'	=> -1,
                 'post_type'		=> 'page',
                 'meta_key'		=> $acf_meta_key,
-                'post__in'      => $post__in
+                'post__in'      => $post__in,
+                'orderby'       => 'post__in'
             ));
 
             // Generate array for JS object
