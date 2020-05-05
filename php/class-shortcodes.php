@@ -118,7 +118,7 @@
                             if ($status == $loc['status'] || empty($status)) {
                                 $description = ($loc['status'] != 'open') ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
                                 $telephone = !empty($loc['phone']) ? '<li class="location-phone"><a href="tel:' . $loc['phone'] . '">' . $loc['phone'] . '</a></li>' : '';
-                                $order_online = !empty($loc['online_ordering']) ? '<li class="location-order-online"><a href="' . $loc['online_ordering'] . '">Order Online</a></li>' : '';
+                                $order_online = !empty($loc['online_ordering']) ? '<a href="' . $loc['online_ordering'] . '" class="order-online">Order Online</a>' : '';
                                 $list_has_data = true;
                                 $group_has_data = true;
                                 $group_output .=
@@ -128,7 +128,10 @@
                                             $description .
                                             $telephone .
                                             '<li class="location-address"><a href="https://www.google.com/maps/place/' . $loc['address'] . '" target="_blank">' . $loc['address'] . '</a></li>' .
-                                            $order_online .
+                                            '<li class="location-links">' .
+                                                '<a href="' . $loc['link'] . '">View More</a>' .
+                                                $order_online .
+                                            '</li>' .
                                         '</ul>' .
                                     '</li>';
                             }

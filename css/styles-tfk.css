@@ -21,8 +21,9 @@
 .tfk-list .location li { color: #4B5862; }
 .tfk-list .location li a { color: inherit !important; border: none; }
 .tfk-list .location li a:hover { color: #487426 !important; }
-.tfk-list .location li.location-order-online a { background-color: #eee; color: #222222 !important; font-size: 12px; text-transform: uppercase; padding: 2px 8px; transition: none; }
-.tfk-list .location li.location-order-online a:hover { background-color: #487426; color: #fff !important; }
+.tfk-list .location li.location-links a { background-color: #eee; color: #222222 !important; font-size: 12px; text-transform: uppercase; padding: 2px 8px; transition: none; margin-right: 4px; white-space: nowrap; display: inline-block; }
+.tfk-list .location li.location-links a:hover { background-color: #487426; color: #fff !important; }
+.tfk-list .location li.location-links a.order-online { background-color: #487426; color: #fff !important; }
 .tfk-list .location .location-title { font-size: 16px; }
 .tfk-list .location .location-status { font-size: 12px; }
 .tfk-list .location .location-description { font-size: 12px; font-style: italic; }
