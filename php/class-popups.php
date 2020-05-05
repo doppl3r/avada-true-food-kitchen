@@ -18,7 +18,8 @@
         }
 
         public function add_popup() {
-            $url = $_SERVER[REQUEST_URI];
+            $url = rtrim($_SERVER[REQUEST_URI], '/');
+            $url_basename = substr($url, strrpos($url, '/') + 1);
             $dir = get_stylesheet_directory_uri();
             $path = get_stylesheet_directory();
             $content = '';
@@ -28,7 +29,7 @@
             foreach ($popups as $item) {
                 $name = pathinfo($item)['filename'];
                 $name = substr($name, strpos($name, '-') + 1);
-                if (strpos($url, $name) !== false) $content = file_get_contents($item);
+                if ($name == $url_basename) $content = file_get_contents($item);
             }
 
             // Set content to global popup if url does not match
