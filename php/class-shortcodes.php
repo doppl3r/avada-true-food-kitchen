@@ -15,6 +15,7 @@
             $height = $atts['height'];
             $group = $atts['group'];
             $status = $atts['status'];
+            $filter = $atts['filter'];
 
             // Enqueue child theme scripts
             wp_enqueue_script('scripts-tfk');
@@ -45,7 +46,7 @@
                 // Get posts if ACF key exits
                 $acf_group_key = 'Location';
                 $acf_meta_key = 'general';
-                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key);
+                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key, $atts);
 
                 // Send array to the front end
                 wp_localize_script('leaflet-tfk', 'locations', $posts);
@@ -64,7 +65,7 @@
                 // Get posts by type
                 if ($type == 'event') { $acf_group_key = 'Events'; $acf_meta_key = 'event'; }
                 else if ($type == 'catering') { $acf_group_key = 'Catering'; $acf_meta_key = 'document'; }
-                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key);
+                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key, $atts);
 
                 // Add editor permission variable
                 $edit_option = current_user_can('edit_pages');
@@ -259,7 +260,7 @@
                 // Get catering PDF for single location
                 $acf_group_key = 'Catering';
                 $acf_meta_key = 'document';
-                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key);
+                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key, $atts);
                 $output = $posts[0]['catering']['url'];
             }
             else if ($data == 'achecker') {
@@ -283,6 +284,7 @@
         }
 
         public function acf_get_posts($acf_group_key, $acf_meta_key, $atts = null) {
+            $filter = $atts['filter'];
             $groups = acf_get_field_groups(array('post_id' => get_the_ID()));
             $acf_group_key_exists = strpos(json_encode($groups), $acf_group_key) > 0;
             $acf_meta_key_exists = !empty(get_field($acf_meta_key));
@@ -305,45 +307,52 @@
             // Generate array for JS object
             $posts = array();
             foreach($acf_posts as $index => $post) {
+                $item = array();
                 // Add general location info to array
                 if ($acf_meta_key == 'general' || $acf_meta_key == 'event' || $acf_meta_key == 'document') {
-                    $city = get_field('general', $post->ID)['city'];
-                    $state = get_field('general', $post->ID)['state'];
-                    $street = get_field('general', $post->ID)['street'];
-                    $zip = get_field('general', $post->ID)['zip'];
-                    $address = $street . ', ' . $city . ', ' . $state . ' ' . $zip;
-                    $latitude = get_field('general', $post->ID)['latitude'];
-                    $longitude = get_field('general', $post->ID)['longitude'];
-                    $geo = array($latitude, $longitude);
-                    $posts[$index]['post_id'] = $post->ID;
-                    $posts[$index]['title'] = get_the_title($post->ID);
-                    $posts[$index]['link'] = get_permalink($post->ID);
-                    $posts[$index]['status'] = get_field('general', $post->ID)['status'];
-                    $posts[$index]['description'] = get_field('general', $post->ID)['description'];
-                    $posts[$index]['online_ordering'] = get_field('general', $post->ID)['online_ordering'];
-                    $posts[$index]['phone'] = get_field('general', $post->ID)['phone'];
-                    $posts[$index]['city'] = $city;
-                    $posts[$index]['state'] = $state;
-                    $posts[$index]['street'] = $street;
-                    $posts[$index]['zip'] = $zip;
-                    $posts[$index]['address'] = $address;
-                    $posts[$index]['geo'] = $geo;
+                    if (strlen(get_field('general', $post->ID)[$filter]) > 0 || empty($filter)) {
+                        $city = get_field('general', $post->ID)['city'];
+                        $state = get_field('general', $post->ID)['state'];
+                        $street = get_field('general', $post->ID)['street'];
+                        $zip = get_field('general', $post->ID)['zip'];
+                        $address = $street . ', ' . $city . ', ' . $state . ' ' . $zip;
+                        $latitude = get_field('general', $post->ID)['latitude'];
+                        $longitude = get_field('general', $post->ID)['longitude'];
+                        $geo = array($latitude, $longitude);
+                        $item['post_id'] = $post->ID;
+                        $item['title'] = get_the_title($post->ID);
+                        $item['link'] = get_permalink($post->ID);
+                        $item['status'] = get_field('general', $post->ID)['status'];
+                        $item['description'] = get_field('general', $post->ID)['description'];
+                        $item['online_ordering'] = get_field('general', $post->ID)['online_ordering'];
+                        $item['phone'] = get_field('general', $post->ID)['phone'];
+                        $item['city'] = $city;
+                        $item['state'] = $state;
+                        $item['street'] = $street;
+                        $item['zip'] = $zip;
+                        $item['address'] = $address;
+                        $item['geo'] = $geo;
+                        $item['filter'] = $atts['filter'];
+                    }
                 }
 
                 // Add events to location array if defined in shortcode
                 if ($acf_meta_key == 'event') {
-                    $posts[$index]['events'] = get_field('event', $post->ID);
+                    $item['events'] = get_field('event', $post->ID);
                 }
 
                 // Add events to location array if defined in shortcode
                 if ($acf_meta_key == 'document') {
-                    $posts[$index]['catering'] = get_field('document', $post->ID);
+                    $item['catering'] = get_field('document', $post->ID);
                 }
 
                 // Add events to location array if defined in shortcode
                 if ($acf_meta_key == 'slide') {
-                    $posts[$index]['slider'] = get_field('slide', $post->ID);
+                    $item['slider'] = get_field('slide', $post->ID);
                 }
+                
+                // Only add item if not empty
+                if (!empty($item)) array_push($posts, $item);
             }
             return $posts;
         }
