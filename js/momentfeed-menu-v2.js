@@ -14,7 +14,7 @@
             function (data) {
                 $('#menu_tabs').removeClass('loading');
                 var sections = data.data[0].sections;
-                addFullMenu(sections);
+                //addFullMenu(sections);
                 $.each(sections, function (i, e) { handleMenu(sections[i], i); });
             }).fail(function (xhr, status, error) { console.error("error: " + xhr.responseText);
         });
@@ -30,6 +30,10 @@
         sections[0].items = items;
     }
     function handleMenu(section, sectionIndex) {
+        // TEMP - shorten alcohol title
+        if (section.displayName.toLowerCase().includes("alcohol".toLowerCase())) section.displayName = "Alcohol to Go";
+        
+        // Add tabs and titles
         $("ul#menu_tabs").append('<li class="primary_menu_tab ' + (tabIndex === 0 ? "active" : "inactive") + '" role="tab" aria-selected="' + (tabIndex === 0 ? "true" : "false") + '" rel="' + sectionIndex + '" tabindex="' + tabIndex + '" aria-controls="' + sectionIndex + '">' + section.displayName + '</li > ');
         $("#output").append('<div id="' + sectionIndex + '" class="tabpanel active row" role="tabpanel" aria-hidden="' + (tabIndex === 0 ? "true" : "false") + '" style="' + (tabIndex === 0 ? "display:block" : "display:none") + '" ></div>');
         $("#" + sectionIndex).append("<fieldset class='category_root' id='menu-" + sectionIndex + "' style='padding:2px;'>" + "<legend>" + section.displayName + "</legend>" + "<div class='category_sections'></div>" + "</fieldset>");
