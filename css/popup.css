@@ -10,5 +10,5 @@ html.disable { overflow: hidden; }
 .popup-alert .wrapper .content h2:after { content: ''; display: block; border-bottom: 3px solid #fff; padding-top: 16px; width: 80px; margin: auto; }
 .popup-alert .wrapper .content p { font-size: 14px; line-height: 18px; margin-bottom: 24px; color: #fff; }
 .popup-alert .wrapper .content p strong { color: #fff; font-size: 20px; line-height: 24px; }
-.popup-alert .wrapper .content a { color: #fff; border-bottom: 1px dashed #fff; }
+.popup-alert .wrapper .content a { color: #fff; border-bottom: 1px dashed #fff; white-space: nowrap; }
 .popup-alert .wrapper .content .close-popup { color: #477528; background-color: #fff; border: none; padding: 12px 24px; border-radius: 5px; margin: 12px 0 0 auto; display: inline-block; text-transform: uppercase; }
