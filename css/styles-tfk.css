@@ -50,7 +50,7 @@
 .tfk-slider .tfk-slide { opacity: 0; background-size: cover; background-position: center; }
 .tfk-slider.slick-initialized .tfk-slide { opacity: 1; }
 .tfk-slider .tfk-slide .item { display: flex; justify-content: center; align-items: center; }
-.tfk-slider .tfk-slide .item .content { position: relative; padding: 12px 48px; text-shadow: 0 0 50px #000, 0 0 50px #000; }
+.tfk-slider .tfk-slide .item .content { position: relative; padding: 12px 48px; text-shadow: 0 0 50px #000, 0 0 50px #000, 0 0 50px #000, 0 0 50px #000; }
 .tfk-slider .tfk-slide .item .content * { opacity: 0; }
 .tfk-slider .tfk-slide .item .content h1 { color: #fff; font-family: 'Bernadette Rough'; text-transform: none; margin: 0 0 16px; }
 .tfk-slider .tfk-slide .item .content h2 { color: #fff; font-family: 'Brandon Grotesque Medium' !important; font-size: 80px !important; line-height: 80px !important; margin: 0 0 16px; }
