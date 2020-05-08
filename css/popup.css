@@ -2,7 +2,7 @@ html.disable { overflow: hidden; }
 .popup-alert.active { display: block; }
 .popup-alert { display: none; position: fixed; background-color: rgba(0, 0, 0, 0.75); padding: 96px 0; top: 0; right: 0; bottom: 0; left: 0; overflow-y: scroll; z-index: 9999999; }
 .popup-alert img { max-width: 100%; }
-.popup-alert .wrapper { background-color: #477528; max-width: 640px; margin: auto; padding: 24px; text-align: center; color: #477528; }
+.popup-alert .wrapper { background-color: #477528; max-width: 640px; margin: auto; padding: 24px; text-align: center; color: #477528; position: relative; }
 .popup-alert .wrapper .title { background-color: #477528; padding: 24px 48px; }
 .popup-alert .wrapper .content { border: 1px solid #fff; margin: 0; padding: 24px; }
 .popup-alert .wrapper .content [data-cookie] { display: none; }
@@ -13,3 +13,5 @@ html.disable { overflow: hidden; }
 .popup-alert .wrapper .content p strong { color: #fff; font-size: 20px; line-height: 24px; }
 .popup-alert .wrapper .content a { color: #fff; border-bottom: 1px dashed #fff; white-space: nowrap; }
 .popup-alert .wrapper .content .primary { color: #477528; background-color: #fff; border: none; padding: 12px 24px; border-radius: 5px; margin: 12px 0; display: inline-block; text-transform: uppercase; }
+.popup-alert .wrapper .content .close-popup { color: #000; border: none; font-size: 36px; line-height: 0; font-weight: bold; background-color: #fff; width: 48px; height: 48px; display: inline-flex; justify-content: center; align-items: center; position: absolute; right: 0; top: 0; padding: 0 0 8px 0; margin: 0; border-radius: 0; text-transform: initial; }
+.popup-alert .wrapper .content .close-popup:hover { color: #fff; background-color:#000; }
