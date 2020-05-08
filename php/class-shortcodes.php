@@ -301,6 +301,9 @@
             // Allow multiple post id's
             if (isset($atts['id'])) $post__in = preg_split('/, ?/', $atts['id']);
 
+            // Explode filter attribute if not empty
+            if (!empty($filter)) $filter = explode(":", $filter);
+
             // Query posts if $acf_meta_key (ACF) exists
             $acf_posts = get_posts(array(
                 'numberposts'	=> -1,
@@ -316,29 +319,32 @@
                 $item = array();
                 // Add general location info to array
                 if ($acf_meta_key == 'general' || $acf_meta_key == 'event' || $acf_meta_key == 'document') {
-                    if (strlen(get_field('general', $post->ID)[$filter]) > 0 || empty($filter)) {
-                        $city = get_field('general', $post->ID)['city'];
-                        $state = get_field('general', $post->ID)['state'];
-                        $street = get_field('general', $post->ID)['street'];
-                        $zip = get_field('general', $post->ID)['zip'];
-                        $address = $street . ', ' . $city . ', ' . $state . ' ' . $zip;
-                        $latitude = get_field('general', $post->ID)['latitude'];
-                        $longitude = get_field('general', $post->ID)['longitude'];
-                        $geo = array($latitude, $longitude);
-                        $item['post_id'] = $post->ID;
-                        $item['title'] = get_the_title($post->ID);
-                        $item['link'] = get_permalink($post->ID);
-                        $item['status'] = get_field('general', $post->ID)['status'];
-                        $item['description'] = get_field('general', $post->ID)['description'];
-                        $item['online_ordering'] = get_field('general', $post->ID)['online_ordering'];
-                        $item['phone'] = get_field('general', $post->ID)['phone'];
-                        $item['city'] = $city;
-                        $item['state'] = $state;
-                        $item['street'] = $street;
-                        $item['zip'] = $zip;
-                        $item['address'] = $address;
-                        $item['geo'] = $geo;
-                        $item['filter'] = $atts['filter'];
+                    // Check if post filter value exists (or shortcode filter attribute does not exist)
+                    if (!empty(get_field('general', $post->ID)[$filter[0]]) || empty($filter[0])) {
+                        // Check if post filter value after ':' is matching shortcode (or shortcode filter attribute does not exist)
+                        if ((get_field('general', $post->ID)[$filter[0]]) == $filter[1] || empty($filter[1])) {
+                            $city = get_field('general', $post->ID)['city'];
+                            $state = get_field('general', $post->ID)['state'];
+                            $street = get_field('general', $post->ID)['street'];
+                            $zip = get_field('general', $post->ID)['zip'];
+                            $address = $street . ', ' . $city . ', ' . $state . ' ' . $zip;
+                            $latitude = get_field('general', $post->ID)['latitude'];
+                            $longitude = get_field('general', $post->ID)['longitude'];
+                            $geo = array($latitude, $longitude);
+                            $item['post_id'] = $post->ID;
+                            $item['title'] = get_the_title($post->ID);
+                            $item['link'] = get_permalink($post->ID);
+                            $item['status'] = get_field('general', $post->ID)['status'];
+                            $item['description'] = get_field('general', $post->ID)['description'];
+                            $item['online_ordering'] = get_field('general', $post->ID)['online_ordering'];
+                            $item['phone'] = get_field('general', $post->ID)['phone'];
+                            $item['city'] = $city;
+                            $item['state'] = $state;
+                            $item['street'] = $street;
+                            $item['zip'] = $zip;
+                            $item['address'] = $address;
+                            $item['geo'] = $geo;
+                        }
                     }
                 }
 
