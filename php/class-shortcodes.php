@@ -116,20 +116,23 @@
                         // Build HTML by type
                         if ($type == 'location' || empty($type)) {
                             if ($status == $loc['status'] || empty($status)) {
-                                $description = ($loc['status'] != 'open') ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
+                                $show_links = $loc['status'] == 'open';
+                                $title = ($show_links == true) ? '<a href="' . $loc['link'] . '">' . $loc['title'] . '</a>' : $loc['title'];
+                                $description = ($show_links == true) ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
                                 $telephone = !empty($loc['phone']) ? '<li class="location-phone"><a href="tel:' . $loc['phone'] . '">' . $loc['phone'] . '</a></li>' : '';
+                                $view_more = ($show_links == true) ? '<a href="' . $loc['link'] . '">View More</a>' : '';
                                 $order_online = !empty($loc['online_ordering']) ? '<a href="' . $loc['online_ordering'] . '" class="order-online">Order Online</a>' : '';
                                 $list_has_data = true;
                                 $group_has_data = true;
                                 $group_output .=
                                     '<li>' .
                                         '<ul class="location">' .
-                                            '<li class="location-title"><a href="' . $loc['link'] . '">' . $loc['title'] . '</a></li>' .
+                                            '<li class="location-title">' . $title . '</li>' .
                                             $description .
                                             $telephone .
                                             '<li class="location-address"><a href="https://www.google.com/maps/place/' . $loc['address'] . '" target="_blank">' . $loc['address'] . '</a></li>' .
                                             '<li class="location-links">' .
-                                                '<a href="' . $loc['link'] . '">View More</a>' .
+                                                $view_more .
                                                 $order_online .
                                             '</li>' .
                                         '</ul>' .
