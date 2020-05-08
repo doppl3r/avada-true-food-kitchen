@@ -1,6 +1,7 @@
 html.disable { overflow: hidden; }
 .popup-alert.active { display: block; }
 .popup-alert { display: none; position: fixed; background-color: rgba(0, 0, 0, 0.75); padding: 96px 0; top: 0; right: 0; bottom: 0; left: 0; overflow-y: scroll; z-index: 9999999; }
+.popup-alert img { max-width: 100%; }
 .popup-alert .wrapper { background-color: #477528; max-width: 640px; margin: auto; padding: 24px; text-align: center; color: #477528; }
 .popup-alert .wrapper .title { background-color: #477528; padding: 24px 48px; }
 .popup-alert .wrapper .content { border: 1px solid #fff; margin: 0; padding: 24px; }
@@ -11,4 +12,4 @@ html.disable { overflow: hidden; }
 .popup-alert .wrapper .content p { font-size: 14px; line-height: 18px; margin-bottom: 24px; color: #fff; }
 .popup-alert .wrapper .content p strong { color: #fff; font-size: 20px; line-height: 24px; }
 .popup-alert .wrapper .content a { color: #fff; border-bottom: 1px dashed #fff; white-space: nowrap; }
-.popup-alert .wrapper .content .close-popup { color: #477528; background-color: #fff; border: none; padding: 12px 24px; border-radius: 5px; margin: 12px 0 0 auto; display: inline-block; text-transform: uppercase; }
+.popup-alert .wrapper .content .primary { color: #477528; background-color: #fff; border: none; padding: 12px 24px; border-radius: 5px; margin: 12px 0; display: inline-block; text-transform: uppercase; }
