@@ -118,7 +118,7 @@
                             if ($status == $loc['status'] || empty($status)) {
                                 $show_links = $loc['status'] == 'open';
                                 $title = ($show_links == true) ? '<a href="' . $loc['link'] . '">' . $loc['title'] . '</a>' : $loc['title'];
-                                $description = ($show_links == true) ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
+                                $description = !empty($loc['description']) ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
                                 $telephone = !empty($loc['phone']) ? '<li class="location-phone"><a href="tel:' . $loc['phone'] . '">' . $loc['phone'] . '</a></li>' : '';
                                 $view_more = ($show_links == true) ? '<a href="' . $loc['link'] . '">View More</a>' : '';
                                 $order_online = !empty($loc['online_ordering']) ? '<a href="' . $loc['online_ordering'] . '" class="order-online">Order Online</a>' : '';
