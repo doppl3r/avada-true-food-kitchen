@@ -279,6 +279,10 @@
                     </a>
                 ';
             }
+            else if ($data == 'momentfeed') {
+                $location_id = get_field('location_id_v2', $post_id);
+                $output = $location_id;
+            }
             else {
                 // Get general location information
                 if (!empty($data) && !empty($type)) $output = get_field($data, $post_id)[$type];
