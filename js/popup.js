@@ -22,7 +22,7 @@
 
 				// Add popup functionality (and set cookie)
 				$('.close-popup, .primary').on('click', function(e){
-					if ($(this).hasClass('close-popup')) e.preventDefault();
+					if ($(this).attr('href') == '#') e.preventDefault();
 					$('html').removeClass('disable');
 					$(this).closest('.popup-alert').removeClass('active');
 					if (cookie != null) Cookies.set(cookie, 'false', { expires: 1 })
