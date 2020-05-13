@@ -36,17 +36,7 @@
             if ($content == '') $content = file_get_contents($dir . '/html/popup-global.html');
 
             // Render popup with content
-            echo '
-                <div class="popup-alert">
-                    <!-- Edit popup: /wp-content/themes/avada-true-food-kitchen/html/ -->
-                    <div class="wrapper">
-                        <div class="title">
-                            <img src="' . $dir . '/img/tfk-logo.png" alt="True Food Kitchen logo">
-                        </div>
-                        <div class="content">' . $content . '</div>
-                    </div>
-                </div>
-            ';
+            echo $content;
         }
     }
 ?>
