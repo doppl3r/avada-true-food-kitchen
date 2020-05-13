@@ -2,7 +2,7 @@
     'use strict';
     var tabIndex = 0;
     var accountId = "5dd48e2324f0994c740192e7";
-    var token = "GPZDVPFRFAGPZIVT"; // live = IFWKRODYUFWLASDC, clone = GPZDVPFRFAGPZIVT
+    var token = "OKGDSVNOHIJFFUMC"; // live = IFWKRODYUFWLASDC, clone = GPZDVPFRFAGPZIVT
     var menus;
 
     function renderMomentfeedMenus(location_id) {
