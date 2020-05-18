@@ -16,3 +16,7 @@
 	// Add global popup behavior
 	require_once 'php/class-popups.php';
 	$tfk_popups = new TFK_Popups();
+
+	// Update navigation with online ordering and reservations
+	require_once 'php/class-inline-scripts.php';
+	$tfk_scripts = new TFK_Inline_Scripts();
