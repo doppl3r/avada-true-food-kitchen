@@ -22,10 +22,17 @@
 
 				// Add popup functionality (and set cookie)
 				$('.popup-alert a').on('click', function(e){
-					if ($(this).attr('href') == '#') e.preventDefault();
+					e.preventDefault();
+					console.log('clicked');
+					var href = $(this).attr('href');
 					$('html').removeClass('disable');
 					$(this).closest('.popup-alert').removeClass('active');
-					if (cookie != null) Cookies.set(cookie, 'false', { expires: 1 })
+					if (cookie != null) Cookies.set(cookie, 'false', { expires: 1 });
+
+					// Redirect page
+					if (href != '#') {
+						window.location.href = href;
+					}
 				});
 			}
 		}

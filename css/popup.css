@@ -13,8 +13,8 @@ html.disable { overflow: hidden; }
 .popup-alert .wrapper .content p strong { color: #fff; font-size: 20px; line-height: 24px; }
 .popup-alert .wrapper .content a { color: #fff; border-bottom: 1px dashed #fff; white-space: nowrap; }
 .popup-alert .wrapper .content .primary { color: #477528; background-color: #fff; border: none; padding: 12px 24px; border-radius: 5px; margin: 12px 0; display: inline-block; text-transform: uppercase; }
-.popup-alert .wrapper .content .close-popup { color: #000; border: none; font-size: 36px; line-height: 0; font-weight: bold; background-color: #fff; width: 48px; height: 48px; display: inline-flex; justify-content: center; align-items: center; position: absolute; right: 0; top: 0; padding: 0 0 8px 0; margin: 0; border-radius: 0; text-transform: initial; }
-.popup-alert .wrapper .content .close-popup:hover { color: #fff; background-color:#000; }
+.popup-alert .wrapper .close-popup { color: #000; border: none; font-size: 36px; line-height: 0; font-weight: bold; background-color: #fff; width: 48px; height: 48px; display: inline-flex; justify-content: center; align-items: center; position: absolute; right: 0; top: 0; padding: 0 0 8px 0; margin: 0; border-radius: 0; text-transform: initial; }
+.popup-alert .wrapper .close-popup:hover { color: #fff; background-color:#000; }
 
 /* New compact popup format */
 .popup-alert.compact .wrapper { padding: 0; }
