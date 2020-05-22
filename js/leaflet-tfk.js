@@ -18,6 +18,8 @@
             var address = value['address'];
             var phone = value['phone'];
             var link = value['link'];
+            var reservations = value['opentable_id'];
+            var reservations_link = (reservations.length > 0) ? '<a href="https://www.opentable.com/single.aspx?rid='+ reservations + '&restref=' + reservations + '" class="reservations" target="_blank">Reservations</a>' : '';
             var online_ordering = value['online_ordering'];
             var online_ordering_link = (online_ordering.length > 0) ? '<a href="'+ online_ordering + '" class="order-online">Order Online</a>' : '';
             var geo = value['geo'];
@@ -31,7 +33,11 @@
                         '<li class="description">'+ description + '</li>' +
                         '<li class="address">'+ address + '</li>' +
                         '<li class="phone">'+ phone + '</li>' +
-                        '<li class="links">' + '<a href="'+ link + '">View More</a>' + online_ordering_link + '</li>' +
+                        '<li class="links">' + 
+                            '<a href="'+ link + '">View More</a>' + 
+                            reservations_link +
+                            online_ordering_link + 
+                        '</li>' +
                     '</ul>'
                 );
             }

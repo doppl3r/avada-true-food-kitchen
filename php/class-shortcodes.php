@@ -121,6 +121,7 @@
                                 $description = !empty($loc['description']) ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
                                 $telephone = !empty($loc['phone']) ? '<li class="location-phone"><a href="tel:' . $loc['phone'] . '">' . $loc['phone'] . '</a></li>' : '';
                                 $view_more = ($show_links == true) ? '<a href="' . $loc['link'] . '">View More</a>' : '';
+                                $reservations = !empty($loc['opentable_id']) ? '<a href="https://www.opentable.com/single.aspx?rid=' . $loc['opentable_id'] . '&restref=' . $loc['opentable_id'] . '" class="reservations" target="_blank">Reservations</a>' : '';
                                 $order_online = !empty($loc['online_ordering']) ? '<a href="' . $loc['online_ordering'] . '" class="order-online">Order Online</a>' : '';
                                 $list_has_data = true;
                                 $group_has_data = true;
@@ -133,6 +134,7 @@
                                             '<li class="location-address"><a href="https://www.google.com/maps/place/' . $loc['address'] . '" target="_blank">' . $loc['address'] . '</a></li>' .
                                             '<li class="location-links">' .
                                                 $view_more .
+                                                $reservations .
                                                 $order_online .
                                             '</li>' .
                                         '</ul>' .
@@ -340,6 +342,7 @@
                             $item['link'] = get_permalink($post->ID);
                             $item['status'] = get_field('general', $post->ID)['status'];
                             $item['description'] = get_field('general', $post->ID)['description'];
+                            $item['opentable_id'] = get_field('general', $post->ID)['opentable_id'];
                             $item['online_ordering'] = get_field('general', $post->ID)['online_ordering'];
                             $item['phone'] = get_field('general', $post->ID)['phone'];
                             $item['city'] = $city;
