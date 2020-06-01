@@ -20,7 +20,7 @@
                 $content .= '
                     jQuery(document).ready(function() {
                         //var oldLink = jQuery(\'[href*="order-online"]\');
-                        var oldLink = jQuery(\'[href*="truefoodkitchen.olo.com"]\');
+                        var oldLink = jQuery(\'[href*="order-online"], [href*="truefoodkitchen.olo.com"]\');
                         var newLink = \'' . $online_ordering . '\';
                         oldLink.attr(\'href\', newLink);
                         oldLink.attr(\'comment\', \'' . $comment . '\');
