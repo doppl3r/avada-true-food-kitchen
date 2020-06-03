@@ -13,17 +13,16 @@
         }
 
         public function add_popup() {
-            $acf_group_key = 'Popup';
             $acf_meta_key = 'popup';
             $groups = acf_get_field_groups(array('post_id' => get_the_ID()));
-            $acf_group_key_exists = strpos(json_encode($groups), $acf_group_key) > 0;
-            $acf_meta_key_exists = !empty(get_field($acf_meta_key));
 
             // Use page-level popup if group exists, or home page popup if null
-            if ($acf_group_key_exists == true && $acf_meta_key_exists == true) $post__in = array(get_the_ID());
+            $post_media = get_field($acf_meta_key, get_the_ID())['content']['image']['media']['url'];
+            $post_text = get_field($acf_meta_key, get_the_ID())['content']['text'];
+            if (!empty($post_media) || !empty($post_text)) $post__in = array(get_the_ID());
             else $post__in = array(get_option('page_on_front'));
 
-            // Query posts if $acf_meta_key (ACF) exists
+            // Query posts if key (ACF) exists
             $acf_posts = get_posts(array(
                 'numberposts'	=> -1,
                 'post_type'		=> 'page',
@@ -37,11 +36,11 @@
             foreach($acf_posts as $index => $post) {
                 $item = array();
                 // Add popup to page array if it exists
-                if ($acf_meta_key == 'popup') $item['popup'] = get_field('popup', $post->ID);
+                $item[$acf_meta_key] = get_field($acf_meta_key, $post->ID);
                 if (!empty($item)) array_push($posts, $item);
             }
             
-            $popup = $posts[0]['popup'];
+            $popup = $posts[0][$acf_meta_key];
             $media = $popup['content']['image']['media']['url'];
             $link = $popup['content']['image']['link'];
             $text = $popup['content']['text'];
@@ -49,6 +48,8 @@
             $date_end = $popup['dates']['date_end'];
             $date_status = TFK_Shortcodes::get_date_status($date_start, $date_end);
             $cookie = $popup['dates']['cookie'];
+            $link = !empty($link) ? $link : '#';
+            $title = !empty($media) ? '<div class="title"><a href="' . $link . '"><img alt="" src="' . $media . '"></a></div>' : '';
             $copy = !empty($text) ? '<div class="content">' . $text . '</div>' : '';
 
             if ($date_status == true) {
@@ -62,11 +63,7 @@
                     <div data-cookie="popup-' . $post__in[0] . '" data-cookie-sleep="' . $cookie . '"></div>
                     <div class="popup-alert compact">
                         <div class="wrapper">
-                            <div class="title">
-                                <a href="' . $link . '">
-                                    <img alt="" src="' . $media . '">
-                                </a>
-                            </div>
+                            ' . $title . '
                             ' . $copy . '
                             <a href="#" class="close-popup small" aria-label="close popup">x</a>
                         </div>
