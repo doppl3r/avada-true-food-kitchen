@@ -4,7 +4,7 @@ html.disable { overflow: hidden; }
 .popup-alert img { max-width: 100%; }
 .popup-alert .wrapper { background-color: #477528; max-width: 640px; margin: auto; padding: 24px; text-align: center; color: #477528; position: relative; }
 .popup-alert .wrapper .title { background-color: #477528; padding: 24px 48px; }
-.popup-alert .wrapper .content { border: 1px solid #fff; margin: 0; padding: 24px; }
+.popup-alert .wrapper .content { color: #fff; border: 1px solid #fff; margin: 0; padding: 24px; }
 .popup-alert .wrapper .content [data-cookie] { display: none; }
 .popup-alert .wrapper .content [data-expires] { display: none; }
 .popup-alert .wrapper .content h2 { font-size: 24px; margin-bottom: 16px; color: #fff; font-family: bg-medium, Helvetica, sans-serif; letter-spacing: 2px; position: relative; }

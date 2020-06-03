@@ -13,9 +13,9 @@
 	require_once 'php/class-resources.php';
 	$tfk_resources = new TFK_Resources();
 
-	// Add global popup behavior
-	require_once 'php/class-popups.php';
-	$tfk_popups = new TFK_Popups();
+	// Add ACF popup library
+	require_once 'php/class-acf-popup.php';
+	$tfk_popups = new TFK_ACF_Popup();
 
 	// Update navigation with online ordering and reservations
 	require_once 'php/class-inline-scripts.php';

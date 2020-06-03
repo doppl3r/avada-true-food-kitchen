@@ -377,6 +377,7 @@
         }
         public function get_date_status($date_start, $date_end) {
             // Get date parameter for override functionality
+            date_default_timezone_set('America/Phoenix');
             if (isset($_GET['date'])) { $today = str_replace("-", "/", $_GET['date']); }
             else { $today = date('Y-m-d'); }
 
