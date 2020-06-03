@@ -51,6 +51,10 @@
             $link = !empty($link) ? $link : '#';
             $title = !empty($media) ? '<div class="title"><a href="' . $link . '"><img alt="" src="' . $media . '"></a></div>' : '';
             $copy = !empty($text) ? '<div class="content">' . $text . '</div>' : '';
+            
+            // Add editor permission variable
+            $edit_option = current_user_can('edit_pages');
+            $edit_value = $edit_option == true ? '<a class="edit" href="/wp-admin/post.php?post=' . $post__in[0] . '&action=edit">Edit <span class="dashicons dashicons-edit"></span></a>' : '';
 
             if ($date_status == true) {
                 // Enqueue scripts and stylesheets
@@ -65,6 +69,7 @@
                         <div class="wrapper">
                             ' . $title . '
                             ' . $copy . '
+                            ' . $edit_value . '
                             <a href="#" class="close-popup small" aria-label="close popup">x</a>
                         </div>
                     </div>
