@@ -4,8 +4,8 @@
             if (!is_admin()) {
                 // Register scripts and stylesheets
                 wp_register_script('cookies', get_stylesheet_directory_uri() . '/js/cookies.js');
-                wp_register_script('popup', get_stylesheet_directory_uri() . '/js/popup.js', array( 'jquery' ));
-                wp_register_style('popup', get_stylesheet_directory_uri() . '/css/popup.css');
+                wp_register_script('acf-popup', get_stylesheet_directory_uri() . '/js/acf-popup.js', array( 'jquery' ));
+                wp_register_style('acf-popup', get_stylesheet_directory_uri() . '/css/acf-popup.css');
 
                 // Add popup
                 add_action('wp_footer', 'TFK_ACF_Popup::add_popup');
@@ -59,20 +59,20 @@
             if ($date_status == true) {
                 // Enqueue scripts and stylesheets
                 wp_enqueue_script('cookies');
-                wp_enqueue_script('popup');
-                wp_enqueue_style('popup');
+                wp_enqueue_script('acf-popup');
+                wp_enqueue_style('acf-popup');
 
                 // Display popup
                 echo '
                     <div data-cookie="popup-' . $post__in[0] . '" data-cookie-sleep="' . $cookie . '"></div>
-                    <div class="popup-alert compact">
+                    <section class="popup-alert compact">
                         <div class="wrapper">
                             ' . $title . '
                             ' . $copy . '
                             ' . $edit_value . '
                             <a href="#" class="close-popup small" aria-label="close popup">x</a>
                         </div>
-                    </div>
+                    </section>
                 ';
             }
         }
