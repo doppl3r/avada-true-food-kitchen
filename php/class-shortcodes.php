@@ -211,6 +211,10 @@
                 $acf_meta_key = 'slide';
                 $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key, $atts);
 
+                // Add editor permission variable
+                $edit_option = current_user_can('edit_pages');
+                $edit_value = '';
+
                 // Enqueue slider libraries
                 wp_enqueue_style('slick');
                 wp_enqueue_script('slick');
@@ -222,11 +226,17 @@
                 $height = floatval(preg_replace("/[^0-9]/", "", $height));
                 $padding = (($height / $width) * 100) . "%";
 
-                // Loop through each slide
+                // Loop through each post group
                 $group_output = '';
                 foreach($posts as $field_group_key => $field_group) {
                     $slides = $posts[$field_group_key]['slider'];
+
+                    // Add edit button for admin users
+                    if ($edit_option == true) $edit_value = '<a class="edit" href="/wp-admin/post.php?post=' . $posts[$field_group_key]['post_id'] . '&action=edit">Edit <span class="dashicons dashicons-edit"></span></a>';
+                    
+                    // Loop through each slide
                     foreach($slides as $slide) {
+
                         $content = $slide['content'];
                         $button = $slide['button'];
                         $date_event = $slide['dates']['date_event'];
@@ -254,6 +264,7 @@
                                             ' . $subtitle_string . '
                                             ' . $text_string . '
                                             ' . $button_string . '
+                                            ' . $edit_value . '
                                         </div>
                                     </div>
                                 </div>
@@ -367,6 +378,7 @@
 
                 // Add events to location array if defined in shortcode
                 if ($acf_meta_key == 'slide') {
+                    $item['post_id'] = $post->ID;
                     $item['slider'] = get_field('slide', $post->ID);
                 }
                 
