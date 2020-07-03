@@ -46,8 +46,8 @@
                         $.each(specialtyHours, function (i, e) {
                             var specialtyItem = specialtyHours[i].split(',');
                             var day = specialtyItem[0], dayHTML = '';
-                            var open = specialtyItem[1], openHTML = '';
-                            var close = specialtyItem[2], closeHTML = '';
+                            var open = convertMilitaryTime(specialtyItem[1]), openHTML = '';
+                            var close = convertMilitaryTime(specialtyItem[2]), closeHTML = '';
                             if (day.length > 0) {
                                 var today = new Date().setHours(0,0,0,0);
                                 var date = new Date(day).setHours(0,0,0,0);
