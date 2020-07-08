@@ -296,6 +296,28 @@
                 $location_id = get_field('location_id_v1', $post_id);
                 $output = $location_id;
             }
+            else if ($data == 'menu-pdf-list') {
+                // Get catering PDF for single location
+                $acf_group_key = 'Menu PDF List';
+                $acf_meta_key = 'menu-location';
+                $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key, $atts);
+                $menu_pdf_list = $posts[0]['menu-pdf-list'];
+
+                // Add editor permission variable
+                $edit_option = current_user_can('edit_pages');
+                $edit_value = '';
+
+                // Loop through ACF data for matching page ID
+                foreach($menu_pdf_list as $index => $list_item) {
+                    $page_assignment_id = url_to_postid($list_item['page']);
+                    if ($page_assignment_id == get_the_ID()) {
+                        if ($edit_option == true) $edit_value = '<a class="edit" href="/wp-admin/post.php?post=' . $list_item['pdf']['uploaded_to'] . '&action=edit">Edit <span class="dashicons dashicons-edit"></span></a>';
+                        $menu_pdf_url = $list_item['pdf']['url'];
+                        $output = '<a class="' . $acf_meta_key . '" href="' . $menu_pdf_url . '" target="_blank">Download Menu</a>' . $edit_value;
+                        break;
+                    }
+                }
+            }
             else {
                 // Get general location information
                 if (!empty($data) && !empty($type)) $output = get_field($data, $post_id)[$type];
@@ -380,6 +402,10 @@
                 if ($acf_meta_key == 'slide') {
                     $item['post_id'] = $post->ID;
                     $item['slider'] = get_field('slide', $post->ID);
+                }
+                
+                if ($acf_meta_key == 'menu-location') {
+                    $item['menu-pdf-list'] = get_field('menu-location', $post->ID);
                 }
                 
                 // Only add item if not empty
