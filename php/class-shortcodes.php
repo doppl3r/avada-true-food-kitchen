@@ -307,14 +307,21 @@
                 $edit_option = current_user_can('edit_pages');
                 $edit_value = '';
 
-                // Loop through ACF data for matching page ID
-                foreach($menu_pdf_list as $index => $list_item) {
-                    $page_assignment_id = url_to_postid($list_item['page']);
-                    if ($page_assignment_id == get_the_ID()) {
-                        if ($edit_option == true) $edit_value = '<a class="edit" href="/wp-admin/post.php?post=' . $list_item['pdf']['uploaded_to'] . '&action=edit">Edit <span class="dashicons dashicons-edit"></span></a>';
-                        $menu_pdf_url = $list_item['pdf']['url'];
-                        $output = '<a class="' . $acf_meta_key . '" href="' . $menu_pdf_url . '" target="_blank">Download Menu</a>' . $edit_value;
-                        break;
+                // Loop through ACF menu list items
+                foreach($menu_pdf_list as $list_item) {
+                    $list_item_pages = $list_item['pages'];
+
+                    // Loop through ACF assigned pages
+                    foreach($list_item_pages as $page) {
+                        $page_assignment_id = url_to_postid($page['page']);
+
+                        // Check if assignment matches current page ID
+                        if ($page_assignment_id == get_the_ID()) {
+                            if ($edit_option == true) $edit_value = '<a class="edit" href="/wp-admin/post.php?post=' . $list_item['pdf']['uploaded_to'] . '&action=edit">Edit <span class="dashicons dashicons-edit"></span></a>';
+                            $menu_pdf_url = $list_item['pdf']['url'];
+                            $output = '<a class="' . $acf_meta_key . '" href="' . $menu_pdf_url . '" target="_blank">Download Menu</a>' . $edit_value;
+                            break 2; // Break both loops
+                        }
                     }
                 }
             }
