@@ -315,17 +315,21 @@
                     $list_item_pages = $list_item['pages'];
                     $menu_pdf_url = $list_item['file']['pdf']['url'];
                     $menu_pdf_type = $list_item['file']['type'];
+                    $menu_text = 'Download Menu';
 
                     // Only check pages if the shortcode type is matching the field type
                     if ($menu_pdf_type == $type) {
+                        // Update menu link text
+                        if ($menu_pdf_type == 'catering') $menu_text = 'Catering Menu';
+
                         // Loop through ACF assigned pages
                         foreach($list_item_pages as $page) {
                             $page_assignment_id = url_to_postid($page['page']);
 
                             // Check if assignment matches current page ID
                             if ($page_assignment_id == get_the_ID()) {
-                                if ($edit_option == true) $edit_value = '<a class="edit" href="/wp-admin/post.php?post=' . $list_item['pdf']['uploaded_to'] . '&action=edit">Edit <span class="dashicons dashicons-edit"></span></a>';
-                                $output = '<a class="' . $acf_meta_key . '" href="' . $menu_pdf_url . '" target="_blank">Download Menu</a>' . $edit_value;
+                                if ($edit_option == true) $edit_value = '<a class="edit" href="/wp-admin/post.php?post=' . $list_item['file']['pdf']['uploaded_to'] . '&action=edit">Edit <span class="dashicons dashicons-edit"></span></a>';
+                                $output = '<a class="' . $acf_meta_key . '" href="' . $menu_pdf_url . '" target="_blank">' . $menu_text . '</a>' . $edit_value;
                                 break 2; // Break both loops
                             }
                         }
