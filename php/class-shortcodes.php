@@ -303,6 +303,9 @@
                 $posts = TFK_Shortcodes::acf_get_posts($acf_group_key, $acf_meta_key, $atts);
                 $menu_pdf_list = $posts[0]['menu-pdf-list'];
 
+                // Resolve NULL $type variable if not set in shortcode
+                if (is_null($type)) $type = 'menu';
+
                 // Add editor permission variable
                 $edit_option = current_user_can('edit_pages');
                 $edit_value = '';
@@ -310,17 +313,21 @@
                 // Loop through ACF menu list items
                 foreach($menu_pdf_list as $list_item) {
                     $list_item_pages = $list_item['pages'];
+                    $menu_pdf_url = $list_item['file']['pdf']['url'];
+                    $menu_pdf_type = $list_item['file']['type'];
 
-                    // Loop through ACF assigned pages
-                    foreach($list_item_pages as $page) {
-                        $page_assignment_id = url_to_postid($page['page']);
+                    // Only check pages if the shortcode type is matching the field type
+                    if ($menu_pdf_type == $type) {
+                        // Loop through ACF assigned pages
+                        foreach($list_item_pages as $page) {
+                            $page_assignment_id = url_to_postid($page['page']);
 
-                        // Check if assignment matches current page ID
-                        if ($page_assignment_id == get_the_ID()) {
-                            if ($edit_option == true) $edit_value = '<a class="edit" href="/wp-admin/post.php?post=' . $list_item['pdf']['uploaded_to'] . '&action=edit">Edit <span class="dashicons dashicons-edit"></span></a>';
-                            $menu_pdf_url = $list_item['pdf']['url'];
-                            $output = '<a class="' . $acf_meta_key . '" href="' . $menu_pdf_url . '" target="_blank">Download Menu</a>' . $edit_value;
-                            break 2; // Break both loops
+                            // Check if assignment matches current page ID
+                            if ($page_assignment_id == get_the_ID()) {
+                                if ($edit_option == true) $edit_value = '<a class="edit" href="/wp-admin/post.php?post=' . $list_item['pdf']['uploaded_to'] . '&action=edit">Edit <span class="dashicons dashicons-edit"></span></a>';
+                                $output = '<a class="' . $acf_meta_key . '" href="' . $menu_pdf_url . '" target="_blank">Download Menu</a>' . $edit_value;
+                                break 2; // Break both loops
+                            }
                         }
                     }
                 }
