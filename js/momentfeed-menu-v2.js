@@ -32,6 +32,7 @@
     function handleMenu(section, sectionIndex) {
         // TEMP - shorten alcohol title
         if (section.displayName.toLowerCase().includes("alcohol".toLowerCase())) section.displayName = "Alcohol to Go";
+        if (section.displayName.toLowerCase().includes("family".toLowerCase())) section.displayName = "Family Meals to Go";
         
         // Add tabs and titles
         $("ul#menu_tabs").append('<li class="primary_menu_tab ' + (tabIndex === 0 ? "active" : "inactive") + '" role="tab" aria-selected="' + (tabIndex === 0 ? "true" : "false") + '" rel="' + sectionIndex + '" tabindex="' + tabIndex + '" aria-controls="' + sectionIndex + '">' + section.displayName + '</li > ');
