@@ -116,7 +116,7 @@
                         // Build HTML by type
                         if ($type == 'location' || empty($type)) {
                             if ($status == $loc['status'] || empty($status)) {
-                                $show_links = $loc['status'] == 'open';
+                                $show_links = strtolower($loc['description']) != 'coming soon'; // Removes 'Coming Soon' links
                                 $title = ($show_links == true) ? '<a href="' . $loc['link'] . '">' . $loc['title'] . '</a>' : $loc['title'];
                                 $description = !empty($loc['description']) ? '<li class="location-description">' . $loc['description'] . '</li>' : '';
                                 $telephone = !empty($loc['phone']) ? '<li class="location-phone"><a href="tel:' . $loc['phone'] . '">' . $loc['phone'] . '</a></li>' : '';
