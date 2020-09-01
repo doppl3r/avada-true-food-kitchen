@@ -77,6 +77,7 @@
                     if (empty($group)) $group_id = $group_key;
                     else $group_id = $group;
                     $group_name = !empty($element[$group_id]) ? $element[$group_id] : "Other";
+                    if (isset($states[$group_name])) $group_name = $states[$group_name]; // Replace state abbreviation key with full name (ex: NV => Nevada)
                     $group_array[$group_name][] = $element;
                 }
 
@@ -93,9 +94,6 @@
                     $group_start = '';
                     $group_end = '';
                     $group_index++;
-
-                    // Convert state abbreviation
-                    if ($group == 'state') $group_toggle = $states[$group_key];
                     
                     // Define group wrapper
                     if (!empty($group)) {
