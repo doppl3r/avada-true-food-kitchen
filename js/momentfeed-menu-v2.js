@@ -34,11 +34,20 @@
         if (section.displayName.toLowerCase().includes("alcohol".toLowerCase())) section.displayName = "Alcohol to Go";
         if (section.displayName.toLowerCase().includes("family".toLowerCase())) section.displayName = "Family Meals to Go";
         
+        // Update description variable
+        var description = (section.description != null) ? "<p class='section_description'>" + section.description + "</p>" : '';
+
         // Add tabs and titles
         $("ul#menu_tabs").append('<li class="primary_menu_tab ' + (tabIndex === 0 ? "active" : "inactive") + '" role="tab" aria-selected="' + (tabIndex === 0 ? "true" : "false") + '" rel="' + sectionIndex + '" tabindex="' + tabIndex + '" aria-controls="' + sectionIndex + '">' + section.displayName + '</li > ');
         $("#output").append('<div id="' + sectionIndex + '" class="tabpanel active row" role="tabpanel" aria-hidden="' + (tabIndex === 0 ? "true" : "false") + '" style="' + (tabIndex === 0 ? "display:block" : "display:none") + '" ></div>');
         $("#" + sectionIndex).append("<fieldset class='category_root' id='menu-" + sectionIndex + "' style='padding:2px;'>" + "<legend>" + section.displayName + "</legend>" + "<div class='category_sections'></div>" + "</fieldset>");
-        $("#menu-" + sectionIndex + " .category_sections").append("<div class='col-md-12 col-sm-12 pb-2'>" + "<h3 class='section_name' style='color:#487426; font-size:18px; font-weight:600; margin:4px; padding:4px;'>" + section.displayName + "</h3>" + "<ul id='section-" + sectionIndex + "' class='section_items'>" + "</ul>" + "</div>");
+        $("#menu-" + sectionIndex + " .category_sections").append(
+            "<div class='col-md-12 col-sm-12 pb-2'>" +
+                "<h3 class='section_name' style='color:#487426; font-size:18px; font-weight:600; margin:4px; padding:4px;'>" + section.displayName + "</h3>" +
+                description +
+                "<ul id='section-" + sectionIndex + "' class='section_items'></ul>" +
+            "</div>"
+        );
         $.each(section.items, function (i, e) { handleItem(section.items[i], sectionIndex); });
         tabIndex = -1;
     }
