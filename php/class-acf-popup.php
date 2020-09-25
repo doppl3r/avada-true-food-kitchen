@@ -51,7 +51,7 @@
             $cookie = $popup['dates']['cookie'];
             $link = !empty($link) ? $link : '#';
             $parameter = (strpos($link, '?') > 0 ? '&' : '?') . 'popup=true';
-            $title = !empty($media) ? '<div class="title"><a href="' . $link . $parameter . '"><img alt="' . $alt . '" src="' . $media . '"></a></div>' : '';
+            $title = !empty($media) ? '<div class="title"><a class="popup-link" href="' . $link . $parameter . '"><img alt="' . $alt . '" src="' . $media . '"></a></div>' : '';
             $copy = !empty($text) ? '<div class="content">' . $text . '</div>' : '';
             
             // Add editor permission variable
