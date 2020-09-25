@@ -50,7 +50,8 @@
             $date_status = TFK_Shortcodes::get_date_status($date_start, $date_end);
             $cookie = $popup['dates']['cookie'];
             $link = !empty($link) ? $link : '#';
-            $title = !empty($media) ? '<div class="title"><a href="' . $link . '"><img alt="' . $alt . '" src="' . $media . '"></a></div>' : '';
+            $parameter = (strpos($link, '?') > 0 ? '&' : '?') . 'popup=true';
+            $title = !empty($media) ? '<div class="title"><a href="' . $link . $parameter . '"><img alt="' . $alt . '" src="' . $media . '"></a></div>' : '';
             $copy = !empty($text) ? '<div class="content">' . $text . '</div>' : '';
             
             // Add editor permission variable
