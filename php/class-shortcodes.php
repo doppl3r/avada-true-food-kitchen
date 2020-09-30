@@ -245,17 +245,19 @@
                         // Conditionally add slide content
                         if ($date_status == true) {
                             $image_string = '';
+                            $image_alt_string = '';
                             $title_string = '';
                             $subtitle_string = '';
                             $text_string = '';
                             $button_string = '';
                             if (!empty($content['image'])) $image_string = $content['image']['url'];
+                            if (!empty($content['image'])) $image_alt_string = $content['image']['alt'];
                             if (!empty($content['title'])) $title_string = '<h1>' . $content['title'] . '</h1>';
                             if (!empty($content['subtitle'])) $subtitle_string = '<h2>' . $content['subtitle'] . '</h2>';
                             if (!empty($content['text'])) $text_string = '<p>' . $content['text'] . '</p>';
                             if (!empty($button['link'])) $button_string = '<a href="' . $button['link'] . '" target="' . $button['target'] . '">' . $button['text'] . '</a>';
                             $group_output .= '
-                                <div class="tfk-slide" style="background-image: url(' . $image_string . ')">
+                                <div class="tfk-slide" style="background-image: url(' . $image_string . ')" role="img" aria-label="' . $image_alt_string . '">
                                     <div class="item">
                                         <div class="content">
                                             ' . $title_string . '
