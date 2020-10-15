@@ -121,6 +121,7 @@
                                 $view_more = ($show_links == true) ? '<a href="' . $loc['link'] . '">View More</a>' : '';
                                 $reservations = !empty($loc['opentable_id']) ? '<a href="https://www.opentable.com/single.aspx?rid=' . $loc['opentable_id'] . '&restref=' . $loc['opentable_id'] . '" class="reservations" target="_blank">Reservations</a>' : '';
                                 $order_online = !empty($loc['online_ordering']) ? '<a href="' . $loc['online_ordering'] . '" class="order-online">Order Online</a>' : '';
+                                $directions = !empty($loc['directions']) ? $loc['directions'] : 'https://www.google.com/maps/place/' . $loc['address'];
                                 $list_has_data = true;
                                 $group_has_data = true;
                                 $group_output .=
@@ -129,7 +130,7 @@
                                             '<li class="location-title">' . $title . '</li>' .
                                             $description .
                                             $telephone .
-                                            '<li class="location-address"><a href="https://www.google.com/maps/place/' . $loc['address'] . '" target="_blank">' . $loc['address'] . '</a></li>' .
+                                            '<li class="location-address"><a href="' . $directions . '" target="_blank">' . $loc['address'] . '</a></li>' .
                                             '<li class="location-links">' .
                                                 $view_more .
                                                 $reservations .
@@ -388,6 +389,7 @@
                             $latitude = get_field('general', $post->ID)['latitude'];
                             $longitude = get_field('general', $post->ID)['longitude'];
                             $geo = array($latitude, $longitude);
+                            $directions = get_field('general', $post->ID)['directions'];
                             $item['post_id'] = $post->ID;
                             $item['title'] = get_the_title($post->ID);
                             $item['link'] = get_permalink($post->ID);
@@ -402,6 +404,7 @@
                             $item['zip'] = $zip;
                             $item['address'] = $address;
                             $item['geo'] = $geo;
+                            $item['directions'] = $directions;
                         }
                     }
                 }

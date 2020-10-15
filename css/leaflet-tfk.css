@@ -6,6 +6,8 @@
 .leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li { margin: 0; }
 .leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.title { font-size: 16px; font-family: 'Brandon Grotesque Bold'; }
 .leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.description { color: #487426; font-weight: bold; margin-bottom: 4px; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.address a { color: inherit !important; }
+.leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.address a:hover { text-decoration: underline; }
 .leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.links a { border: none; text-transform: uppercase; color: #212121 !important; font-size: 12px; background-color: #eee; padding: 4px 8px; display: inline-block; margin: 4px 4px 0 0; transition: 0s; }
 .leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.links a:hover { background-color: #487426; color: #fff !important; }
 .leaflet-container .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content ul li.links a.order-online { background-color: #487426; color: #fff !important; }

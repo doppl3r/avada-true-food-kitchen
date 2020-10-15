@@ -12,7 +12,11 @@
                     var addressFull = data.address + ", " + data.addressExtended + " " + data.locality + ", " + data.region + " " + data.postcode;
                     $('.address-phone').html(data.phone);
                     $('.address-card').html(addressFull);
-                    $('.address-card').attr('href', 'https://www.google.com/maps/place/' + address);
+
+                    // Add link if directions is empty
+                    if ($('.address-card').attr('href').length <= 0) {
+                        $('.address-card').attr('href', 'https://www.google.com/maps/place/' + address);
+                    }
 
                     // Update hours if not empty
                     var hoursHTML = '';
