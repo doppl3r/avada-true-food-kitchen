@@ -4,7 +4,7 @@
         $(document).ready(function () {
             // Update special hours
             $.ajax({
-                url: 'https://momentfeed-prod.apigee.net/lf/location/store-info/' + momentFeedID + '?auth_token=IFWKRODYUFWLASDC',
+                url: 'https://api.momentfeed.com/v1/lf/location/store-info/' + momentFeedID + '?auth_token=IFWKRODYUFWLASDC',
                 type: 'GET',
                 success: function (data) {
                     // Update phone and address

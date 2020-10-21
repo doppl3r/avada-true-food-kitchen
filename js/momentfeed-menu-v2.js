@@ -7,7 +7,7 @@
 
     function renderMomentfeedMenus(location_id) {
         var proxy = '';
-        var apiUrl = "https://momentfeed-prod.apigee.net/menu/v1/location/" + location_id+ "/menus?auth_token=" + token;
+        var apiUrl = "https://api.momentfeed.com/v1/menus/v1/location/" + location_id+ "/menus?auth_token=" + token;
         $('#menu_tabs').addClass('loading');
         if (window.location.href.includes('truefoodkitchen.com') == false) proxy = 'https://cors-anywhere.herokuapp.com/';
         $.getJSON(proxy + apiUrl).done(
