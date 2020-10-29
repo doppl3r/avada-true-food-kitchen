@@ -245,6 +245,8 @@
 
                         // Conditionally add slide content
                         if ($date_status == true) {
+                            $item_type = 'div';
+                            $item_href = '';
                             $image_string = '';
                             $image_alt_string = '';
                             $title_string = '';
@@ -256,18 +258,26 @@
                             if (!empty($content['title'])) $title_string = '<h1>' . $content['title'] . '</h1>';
                             if (!empty($content['subtitle'])) $subtitle_string = '<h2>' . $content['subtitle'] . '</h2>';
                             if (!empty($content['text'])) $text_string = '<p>' . $content['text'] . '</p>';
-                            if (!empty($button['link'])) $button_string = '<a href="' . $button['link'] . '" target="' . $button['target'] . '">' . $button['text'] . '</a>';
+                            if (!empty($button['link'])) {
+                                if (!empty($button['text'])) {
+                                    $button_string = '<a href="' . $button['link'] . '" target="' . $button['target'] . '">' . $button['text'] . '</a>';
+                                }
+                                else {
+                                    $item_type = 'a';
+                                    $item_href = 'href=' . $button['link'];
+                                }
+                            }
                             $group_output .= '
                                 <div class="tfk-slide" style="background-image: url(' . $image_string . ')" role="img" aria-label="' . $image_alt_string . '">
-                                    <div class="item">
-                                        <div class="content">
+                                    <' . $item_type . ' ' . $item_href . ' class="item">
+                                        <span class="content">
                                             ' . $title_string . '
                                             ' . $subtitle_string . '
                                             ' . $text_string . '
                                             ' . $button_string . '
-                                            ' . $edit_value . '
-                                        </div>
-                                    </div>
+                                        </span>
+                                    </' . $item_type . '>
+                                    ' . $edit_value . '
                                 </div>
                             ';
                         }
