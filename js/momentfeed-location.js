@@ -59,7 +59,7 @@
                                     day = day.substring(day.indexOf('-') + 1);
                                     if (day != null) dayHTML = '<span class="day">' + day + '</span>';
                                     if (open != null) openHTML = '<span class="hour-open">' + open + '</span>';
-                                    if (close != null) closeHTML = '<span class="hour-close">' + close + '</span>';
+                                    if (close != null && close != "CLOSED") closeHTML = '<span class="hour-close">' + close + '</span>';
                                     specialtyHoursHTML += '<div class="day-row">' + dayHTML + openHTML + closeHTML + '</div>';
                                     hasFutureDates = true;
                                 }
@@ -100,11 +100,13 @@
         });
     }
     function convertMilitaryTime(time) {
-        if (time != null) {
+        if (time != null && time != "CLOSED") {
             var period = parseInt(time) < 1200 ? 'am' : 'pm';
             var hour = parseInt(time.substring(0, 2)) % 12;
             var min = ("0" + parseInt(time.substring(2))).slice(-2);
             return hour + ":" + min + period;
+        } else if (time == "CLOSED") {
+            return "CLOSED";
         }
     }
 })(jQuery);
