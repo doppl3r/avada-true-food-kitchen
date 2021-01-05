@@ -3,8 +3,13 @@
         public function __construct() {
             if (!is_admin()) {
                 // Add inline script
+                add_action('avada_before_header_wrapper', 'TFK_Inline_Scripts::add_header_scripts');
                 add_action('wp_footer', 'TFK_Inline_Scripts::add_inline_scripts');
             }
+        }
+
+        public function add_header_scripts() {
+            echo '<a href="#" class="UsableNetAssistive" onclick="return enableUsableNetAssistive()">Enable Accessibility</a>';
         }
 
         public function add_inline_scripts() {
