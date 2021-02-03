@@ -9,7 +9,7 @@
         }
 
         public function add_header_scripts() {
-            echo '<a href="#" class="UsableNetAssistive" onclick="return enableUsableNetAssistive()">Enable Accessibility</a>';
+            echo '<div class="UsableNetAssistive"><a href="#" class="UsableNetAssistive" onclick="return enableUsableNetAssistive()">Enable Accessibility</a></div>';
         }
 
         public function add_inline_scripts() {
