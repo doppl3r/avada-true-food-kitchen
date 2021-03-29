@@ -22,6 +22,8 @@
             var reservations_link = (reservations.length > 0) ? '<a href="https://www.opentable.com/single.aspx?rid='+ reservations + '&restref=' + reservations + '" class="reservations" target="_blank">Reservations</a>' : '';
             var online_ordering = value['online_ordering'];
             var online_ordering_link = (online_ordering.length > 0) ? '<a href="'+ online_ordering + '" class="order-online">Order Online</a>' : '';
+            var tripleseat = value['tripleseat_id'];
+            var tripleseat_link = (tripleseat.length > 0) ? '<a href="https://truefood.tripleseat.com/party_request/' + tripleseat + '" class="private-dining">Private Dining</a>' : '';
             var geo = value['geo'];
             var directions = (value['directions'].length > 0) ? value['directions'] : 'https://www.google.com/maps/place/' + address;
 
@@ -37,6 +39,7 @@
                         '<li class="links">' + 
                             '<a href="'+ link + '">View More</a>' + 
                             reservations_link +
+                            tripleseat_link + 
                             online_ordering_link + 
                         '</li>' +
                     '</ul>'
