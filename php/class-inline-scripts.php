@@ -56,6 +56,16 @@
                     });
                 ';
             }
+            
+            // Add tripleseat link to about section
+            if (!empty($tripleseat_id)) {
+                $content .= '
+                    jQuery(document).ready(function() {
+                        var links = jQuery(\'.location-about .links\');
+                        links.append(\'<li><a href="' . $tripleseat_link . '" comment="' . $comment . '">Private Dining</a></li>\');
+                    });
+                ';
+            }
 
             // Add opentable link to about section
             if (!empty($opentable_id)) {
@@ -63,16 +73,6 @@
                     jQuery(document).ready(function() {
                         var links = jQuery(\'.location-about .links\');
                         links.append(\'<li><a href="' . $opentable_link . '" comment="' . $comment . '">Make A Reservation</a></li>\');
-                    });
-                ';
-            }
-
-            // Add tripleseat link to about section
-            if (!empty($tripleseat_id)) {
-                $content .= '
-                    jQuery(document).ready(function() {
-                        var links = jQuery(\'.location-about .links\');
-                        links.append(\'<li><a href="' . $tripleseat_link . '" comment="' . $comment . '">Private Dining</a></li>\');
                     });
                 ';
             }
