@@ -19,6 +19,8 @@
             $online_ordering = $general['online_ordering'];
             $opentable_id = $general['opentable_id'];
             $opentable_link = 'https://www.opentable.com/single.aspx?rid=' . $opentable_id . '&restref=' . $opentable_id;
+            $tripleseat_id = $general['tripleseat_id'];
+            $tripleseat_link = 'https://truefood.tripleseat.com/party_request/' . $tripleseat_id;
 
             // Online ordering link update
             if (!empty($online_ordering)) {
@@ -55,12 +57,22 @@
                 ';
             }
 
-            // Add online ordering link to about section
+            // Add opentable link to about section
             if (!empty($opentable_id)) {
                 $content .= '
                     jQuery(document).ready(function() {
                         var links = jQuery(\'.location-about .links\');
                         links.append(\'<li><a href="' . $opentable_link . '" comment="' . $comment . '">Make A Reservation</a></li>\');
+                    });
+                ';
+            }
+
+            // Add tripleseat link to about section
+            if (!empty($tripleseat_id)) {
+                $content .= '
+                    jQuery(document).ready(function() {
+                        var links = jQuery(\'.location-about .links\');
+                        links.append(\'<li><a href="' . $tripleseat_link . '" comment="' . $comment . '">Private Dining</a></li>\');
                     });
                 ';
             }
