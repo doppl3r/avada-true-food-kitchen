@@ -5,20 +5,25 @@ var token = "OKGDSVNOHIJFFUMC"; // live = IFWKRODYUFWLASDC, clone = GPZDVPFRFAGP
 var menus;
 
 if (location_id == undefined) var location_id = '5dd49833e4b0d25de7766e61';
+if (custom_menu == undefined) var custom_menu = false;
 
 function renderMomentfeedMenus(location_id) {
     var proxy = '';
     var apiUrl = "https://api.momentfeed.com/v1/menus/v1/location/" + location_id+ "/menus?auth_token=" + token;
     $('#menu_tabs').addClass('loading');
     if (window.location.href.includes('truefoodkitchen.com') == false) proxy = 'https://cors-anywhere.herokuapp.com/';
-    $.getJSON(proxy + apiUrl).done(
-        function (data) {
-            $('#menu_tabs').removeClass('loading');
-            var sections = data.data[0].sections;
-            //addFullMenu(sections);
-            $.each(sections, function (i, e) { handleMenu(sections[i], i); });
-        }).fail(function (xhr, status, error) { console.error("error: " + xhr.responseText);
-    });
+    
+    // Use momentfeed URL if custom menu is not defined
+    if (custom_menu == false) {
+        $.getJSON(proxy + apiUrl).done(
+            function (data) {
+                $('#menu_tabs').removeClass('loading');
+                var sections = data.data[0].sections;
+                //addFullMenu(sections);
+                $.each(sections, function (i, e) { handleMenu(sections[i], i); });
+            }).fail(function (xhr, status, error) { console.error("error: " + xhr.responseText);
+        });
+    }
 }
 
 function addFullMenu(sections) {
