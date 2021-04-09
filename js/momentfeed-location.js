@@ -99,6 +99,13 @@
             });
         });
     }
+
+    /* location menu tabs and links styling */
+    $(document).ready(function($) {
+        $(".item_description:empty").css("display", "none");
+        $(".links li:empty").css("display", "none");
+   });
+
     function convertMilitaryTime(time) {
         if (time != null && time != "CLOSED") {
             var period = parseInt(time) < 1200 ? 'am' : 'pm';
